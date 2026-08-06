@@ -5,10 +5,7 @@ finding your GCP project ID, authenticating, and the `init`/`plan`/
 `apply`/`destroy` workflow you'll repeat in every exercise below.
 Then work through the fourteen numbered exercises in order of
 increasing difficulty. Each folder is self-contained: work inside it,
-don't reference other exercises' state. Look at
-[example_project](example_project) any time you get stuck — it's a
-complete, working reference that demonstrates every resource type
-used below.
+don't reference other exercises' state.
 
 Each numbered exercise folder has two subfolders:
 
