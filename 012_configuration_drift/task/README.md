@@ -22,7 +22,7 @@ resolve it.
    `clickops_resource=true` — any time you touch a resource by hand
    instead of through Terraform, label it this way so it's easy to
    spot in the Console (see
-   [000_exercise_setup](../../000_exercise_setup) step 6):
+   [000_start_here](../../000_start_here) step 6):
    ```bash
    gcloud storage buckets update gs://YOUR_BUCKET \
      --update-labels=environment=prod,clickops_resource=true

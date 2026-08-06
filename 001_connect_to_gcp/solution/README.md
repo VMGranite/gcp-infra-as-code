@@ -22,7 +22,7 @@ credentials, and your project ID are all correctly wired together.
   reading, not writing.
 - If this fails, the error tells you *where* the chain is broken: a
   provider/version error means step 2 of setup is wrong, an auth
-  error means [000_exercise_setup](../../000_exercise_setup) step 2
+  error means [000_start_here](../../000_start_here) step 2
   wasn't completed (specifically `gcloud auth application-default
   login`), and a "project not found" error usually means a typo in
   the project ID.

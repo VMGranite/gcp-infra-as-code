@@ -11,7 +11,7 @@ created by Terraform — under Terraform's management, using an
    `clickops_resource=true` as you create it — any resource you make
    by hand instead of through Terraform should be tagged this way so
    it's identifiable in the Console (see
-   [000_exercise_setup](../../000_exercise_setup) step 6):
+   [000_start_here](../../000_start_here) step 6):
    ```bash
    gcloud storage buckets create gs://YOUR_PROJECT_ID-imported-demo \
      --location=us-central1 \

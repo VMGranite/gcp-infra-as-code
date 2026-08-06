@@ -1,4 +1,4 @@
-# 000 — Exercise Setup
+# 000 — Start Here
 
 Do this once before starting the following exercises.
 

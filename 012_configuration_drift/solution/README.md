@@ -22,7 +22,7 @@ last time."
 ## Walking through the two options
 
 After manually setting the label to `prod` (and, per
-[000_exercise_setup](../../000_exercise_setup) step 6, tagging the
+[000_start_here](../../000_start_here) step 6, tagging the
 change `clickops_resource=true` so it's identifiable as a manual
 edit):
 

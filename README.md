@@ -1,13 +1,14 @@
-# Student Exercises
+# Terraform + GCP: Intro Course
 
-Start with [000_exercise_setup](000_exercise_setup) — it walks through
+Start with [000_start_here](000_start_here) — it walks through
 finding your GCP project ID, authenticating, and the `init`/`plan`/
 `apply`/`destroy` workflow you'll repeat in every exercise below.
 Then work through the fourteen numbered exercises in order of
 increasing difficulty. Each folder is self-contained: work inside it,
-don't reference other exercises' state. Look at `../example_project`
-any time you get stuck — it demonstrates every resource type used
-below.
+don't reference other exercises' state. Look at
+[example_project](example_project) any time you get stuck — it's a
+complete, working reference that demonstrates every resource type
+used below.
 
 Each numbered exercise folder has two subfolders:
 
@@ -19,7 +20,7 @@ Each numbered exercise folder has two subfolders:
 
 | # | Exercise | Concepts |
 |---|---|---|
-| [000_exercise_setup](000_exercise_setup) | Get your project ID, authenticate, learn the Terraform workflow | `gcloud auth`, `init`/`plan`/`apply`/`destroy` |
+| [000_start_here](000_start_here) | Get your project ID, authenticate, learn the Terraform workflow | `gcloud auth`, `init`/`plan`/`apply`/`destroy` |
 | [001_connect_to_gcp](001_connect_to_gcp/task) | Connect Terraform to GCP | provider, auth, `init`/`plan` |
 | [002_create_storage_bucket](002_create_storage_bucket/task) | Your first resource: a storage bucket | resources, `apply`/`destroy` |
 | [003_variables_and_outputs](003_variables_and_outputs/task) | Variables and outputs | `variable`, `output`, `terraform.tfvars` |
@@ -37,7 +38,7 @@ Each numbered exercise folder has two subfolders:
 
 ## General setup
 
-See [000_exercise_setup](000_exercise_setup) for finding your project
+See [000_start_here](000_start_here) for finding your project
 ID, authenticating, and the full `init`/`plan`/`apply`/`destroy`
 workflow. Always run `terraform destroy` before moving to the next
 exercise so you aren't paying for resources you're done with.
