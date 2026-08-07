@@ -28,3 +28,10 @@ credentials, and your project ID are all correctly wired together.
   the project ID.
 - There's nothing to `destroy` for this exercise — no resources were
   created.
+- The `data "google_project"` block doesn't set `project_id` — it
+  inherits the provider's configured project automatically. That's
+  deliberate: your project ID only needs to be edited in one place
+  (the `provider` block). If it were duplicated in the data source
+  too, editing only the provider block would leave a stale value
+  behind, and you'd get a "project not found" error that has nothing
+  to do with your actual credentials or project ID being wrong.

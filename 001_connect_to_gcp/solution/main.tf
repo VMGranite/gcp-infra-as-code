@@ -15,7 +15,8 @@ provider "google" {
 }
 
 data "google_project" "this" {
-  project_id = "your-gcp-project-id" # TODO: replace with your project ID
+  # No project_id set — this defaults to the provider's configured
+  # project above, so there's only one place to put your project ID.
 }
 
 output "project_display_name" {
