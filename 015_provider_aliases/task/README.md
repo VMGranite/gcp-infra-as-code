@@ -4,6 +4,8 @@
 (here, two regions) from one Terraform configuration, using a second,
 aliased `provider` block.
 
+[Visit the Official Terraform Provider Configuration Documentation Here](https://developer.hashicorp.com/terraform/language/providers/configuration)
+
 ## Tasks
 
 1. Keep your default `provider "google"` block (region

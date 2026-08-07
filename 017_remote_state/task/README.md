@@ -3,6 +3,8 @@
 **Goal:** move off local state and understand why teams don't commit
 `terraform.tfstate` to git.
 
+[Visit the Official Terraform GCS Backend Documentation Here](https://developer.hashicorp.com/terraform/language/backend/gcs)
+
 ## Tasks
 
 1. Create a GCS bucket to hold state — you can do this once by hand
@@ -16,7 +18,7 @@
    terraform {
      backend "gcs" {
        bucket = "YOUR_STATE_BUCKET"
-       prefix = "student-exercises/009"
+       prefix = "terraform-course/017-remote-state"
      }
    }
    ```
@@ -24,7 +26,7 @@
    and offer to migrate your existing local state into GCS.
 4. Confirm the state file now lives in the bucket:
    ```bash
-   gcloud storage ls gs://YOUR_STATE_BUCKET/student-exercises/009/
+   gcloud storage ls gs://YOUR_STATE_BUCKET/terraform-course/017-remote-state/
    ```
 5. Delete your local `terraform.tfstate` (it should no longer be
    needed — GCS is now the source of truth) and run `terraform plan`

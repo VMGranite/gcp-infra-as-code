@@ -6,6 +6,8 @@ built-in Terraform workspaces — a different tradeoff than
 twice" approach, which you'll compare against directly in
 [022_capstone_module](../022_capstone_module).
 
+[Visit the Official Terraform Workspaces Documentation Here](https://developer.hashicorp.com/terraform/language/state/workspaces)
+
 ## Tasks
 
 1. Define a single `google_storage_bucket` whose name incorporates

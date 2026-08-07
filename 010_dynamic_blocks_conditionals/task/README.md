@@ -4,6 +4,10 @@
 writing each one by hand, and pick a value based on a condition
 instead of hardcoding it.
 
+[Visit the Official Terraform Dynamic Blocks Documentation Here](https://developer.hashicorp.com/terraform/language/expressions/dynamic-blocks)
+
+[Visit the Official Terraform Conditional Expressions Documentation Here](https://developer.hashicorp.com/terraform/language/expressions/conditionals)
+
 ## Tasks
 
 1. Reuse the network/subnet pattern from

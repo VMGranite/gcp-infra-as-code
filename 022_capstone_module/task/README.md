@@ -1,8 +1,10 @@
 # 022 — Capstone: Build a Module
 
-**Goal:** refactor everything from exercises 005–007 (network,
+**Goal:** refactor everything from exercises 008, 009, 011 (network,
 firewall, VM) into a reusable module, then call it twice with
 different inputs.
+
+[Visit the Official Terraform Modules Overview Documentation Here](https://developer.hashicorp.com/terraform/language/modules)
 
 ## Tasks
 
@@ -34,6 +36,6 @@ different inputs.
 ## Discussion question
 
 What did moving this into a module force you to make explicit that
-wasn't explicit in exercise 007? What would you still need to add
+wasn't explicit in exercise 011? What would you still need to add
 before this module was safe to reuse across a whole team (e.g.
 remote state per instance, variable validation, naming conventions)?

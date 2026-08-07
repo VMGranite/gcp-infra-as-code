@@ -3,6 +3,8 @@
 **Goal:** create and destroy your first real GCP resource with
 Terraform.
 
+[Visit the Official Terraform Resource Block Documentation Here](https://developer.hashicorp.com/terraform/language/resources/syntax)
+
 ## Tasks
 
 1. In `main.tf`, define a `google_storage_bucket` resource. Bucket

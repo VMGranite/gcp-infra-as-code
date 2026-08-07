@@ -3,6 +3,8 @@
 **Goal:** understand implicit resource dependencies by creating a
 bucket and an object inside it in the same configuration.
 
+[Visit the Official Terraform Resource Dependencies Tutorial Here](https://developer.hashicorp.com/terraform/tutorials/configuration-language/dependencies)
+
 ## Tasks
 
 1. Create a `hello.txt` file in this folder with any text content.

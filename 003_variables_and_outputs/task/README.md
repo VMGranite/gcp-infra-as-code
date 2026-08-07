@@ -3,6 +3,10 @@
 **Goal:** stop hardcoding values. Parameterize the bucket from
 exercise 002 with variables, and expose useful values as outputs.
 
+[Visit the Official Terraform Input Variables Documentation Here](https://developer.hashicorp.com/terraform/language/values/variables)
+
+[Visit the Official Terraform Output Values Documentation Here](https://developer.hashicorp.com/terraform/language/values/outputs)
+
 ## Tasks
 
 1. Create a `variables.tf` with:

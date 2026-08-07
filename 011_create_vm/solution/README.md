@@ -2,7 +2,7 @@
 
 ## What this creates
 
-- The network, subnet, and firewall rules from 005/006.
+- The network, subnet, and firewall rules from 008/009.
 - **`google_compute_instance`** — an `e2-micro` Debian 12 VM, tagged
   `["ssh", "http-server"]`, with a startup script that installs and
   starts Apache.
@@ -35,7 +35,7 @@
   `http://<external-ip>` doesn't respond immediately, that's normal,
   not a failure.
 - SSH access here relies entirely on the IAP-scoped firewall rule
-  from exercise 006 — there's no rule allowing SSH from the open
+  from exercise 009 — there's no rule allowing SSH from the open
   internet, by design.
 - **Cost note:** `e2-micro` is free-tier eligible under normal usage
   in the three regions above, but "free" isn't the same as "can't

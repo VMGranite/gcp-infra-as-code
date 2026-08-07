@@ -3,6 +3,8 @@
 **Goal:** learn that GCP networking is explicit — nothing exists
 until you define it.
 
+[Visit the Official google_compute_network Resource Documentation Here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network)
+
 ## Tasks
 
 1. Enable the Compute Engine API if you haven't already:

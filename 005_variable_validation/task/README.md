@@ -3,6 +3,9 @@
 **Goal:** make bad input fail fast, with a clear message, before
 Terraform ever talks to GCP.
 
+[Visit the Official Terraform Input Variables Documentation Here](https://developer.hashicorp.com/terraform/language/values/variables)
+(see the "Custom Validation Rules" section)
+
 ## Tasks
 
 1. Define a variable `environment` (string) with a `validation` block

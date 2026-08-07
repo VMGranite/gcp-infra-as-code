@@ -3,6 +3,8 @@
 **Goal:** stop repeating yourself. Compute a value once with `locals`
 and reuse it, instead of re-typing the same expression everywhere.
 
+[Visit the Official Terraform Locals Tutorial Here](https://developer.hashicorp.com/terraform/tutorials/configuration-language/locals)
+
 ## Tasks
 
 1. Reuse the bucket from

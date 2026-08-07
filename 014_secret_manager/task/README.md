@@ -4,6 +4,8 @@
 never printed in plan/apply output — and grant a service account
 narrow access to read it.
 
+[Visit the Official google_secret_manager_secret Resource Documentation Here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/secret_manager_secret)
+
 ## Tasks
 
 1. Enable the Secret Manager API:

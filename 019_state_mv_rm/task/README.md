@@ -4,6 +4,8 @@
 destroying and recreating the real thing, and understand what
 `terraform state rm` actually does (and doesn't) touch.
 
+[Visit the Official Terraform State Management Tutorial Here](https://developer.hashicorp.com/terraform/tutorials/state/state-cli)
+
 ## Tasks
 
 1. Define a `google_storage_bucket` resource named `legacy`

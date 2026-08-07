@@ -3,7 +3,7 @@
 ## What this creates
 
 - A `modules/vm_with_network/` module — the network, subnet, firewall
-  rule, and VM from exercises 005–007, generalized behind input
+  rule, and VM from exercises 008, 009, 011, generalized behind input
   variables.
 - Two calls to that module from the root `main.tf` — `dev` and
   `staging` — each with its own `name_prefix` and `subnet_cidr`, so

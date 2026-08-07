@@ -4,7 +4,7 @@
 files, called with a `source` argument — by wrapping something you've
 already built into one, then reusing it twice.
 
-[Official Terraform Module Tutorial Link](https://developer.hashicorp.com/terraform/tutorials/modules/module-create)
+[Visit the Official Terraform Module Tutorial Here](https://developer.hashicorp.com/terraform/tutorials/modules/module-create)
 
 ## Tasks
 

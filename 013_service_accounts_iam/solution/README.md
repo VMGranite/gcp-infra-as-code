@@ -7,7 +7,7 @@
   the VM.
 - **`google_storage_bucket_iam_member`** — grants `vm_runner`
   `roles/storage.objectViewer`, **on that one bucket only**.
-- A `google_compute_instance` (network/firewall from 005/006) running
+- A `google_compute_instance` (network/firewall from 008/009) running
   as `vm_runner` instead of the project's default Compute Engine
   service account.
 

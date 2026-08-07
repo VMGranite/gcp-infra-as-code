@@ -2,6 +2,8 @@
 
 Do this once before starting the following exercises.
 
+[Visit the Official Terraform + GCP Get Started Tutorial Here](https://developer.hashicorp.com/terraform/tutorials/gcp-get-started)
+
 ## 1. Find your GCP project ID
 
 Terraform needs to know exactly which GCP project to create resources

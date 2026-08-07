@@ -3,6 +3,10 @@
 **Goal:** create multiple similar resources from a single block,
 instead of copy-pasting a resource once per item.
 
+[Visit the Official Terraform for_each Tutorial Here](https://developer.hashicorp.com/terraform/tutorials/configuration-language/for-each)
+
+[Visit the Official Terraform count Tutorial Here](https://developer.hashicorp.com/terraform/tutorials/configuration-language/count)
+
 ## Tasks
 
 1. Define a variable `environments` — a set of strings, default

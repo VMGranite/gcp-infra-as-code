@@ -2,7 +2,7 @@
 
 ## What this creates
 
-- The network/subnet from exercise 005, plus:
+- The network/subnet from exercise 008, plus:
 - **`google_compute_firewall.allow_ssh_iap`** — SSH, only from
   `35.235.240.0/20`, only on instances tagged `ssh`.
 - **`google_compute_firewall.allow_http`** — HTTP, from anywhere,
@@ -35,7 +35,7 @@ which is the mistake this rule is designed to make hard to make.
 ## Things worth noticing
 
 - Nothing enforces that a VM using these rules is actually tagged —
-  tags are just labels. If you create a VM in exercise 007 and forget
+  tags are just labels. If you create a VM in exercise 011 and forget
   the `tags` attribute, these rules simply won't apply to it (which
   usually means you can't reach it at all — that's the fail-safe
   direction to err on).

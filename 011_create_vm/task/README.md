@@ -1,12 +1,14 @@
 # 011 — Deploy a VM
 
-**Goal:** bring networking (005/006) and compute together by
+**Goal:** bring networking (008/009) and compute together by
 deploying a real VM with a startup script.
+
+[Visit the Official google_compute_instance Resource Documentation Here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance)
 
 ## Tasks
 
 1. Rebuild (or copy in) the network, subnet, and firewall rules from
-   005/006.
+   008/009.
 2. Define a `google_compute_instance`:
    - `machine_type = "e2-micro"` (Always Free tier eligible in
      `us-central1`, `us-west1`, `us-east1`)

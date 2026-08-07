@@ -3,9 +3,11 @@
 **Goal:** practice least-privilege network design with
 `google_compute_firewall`.
 
+[Visit the Official google_compute_firewall Resource Documentation Here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_firewall)
+
 ## Tasks
 
-1. Reuse the network from exercise 005 (copy it into this folder or
+1. Reuse the network from exercise 008 (copy it into this folder or
    rebuild it here).
 2. Add a firewall rule that allows SSH (port 22) **only** from
    Google's Identity-Aware Proxy range: `35.235.240.0/20`. Use

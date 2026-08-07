@@ -13,7 +13,7 @@ terraform {
   # `terraform init` to migrate local state into it.
   backend "gcs" {
     bucket = "your-gcp-project-id-tf-state" # TODO: replace with your state bucket
-    prefix = "student-exercises/009"
+    prefix = "terraform-course/017-remote-state"
   }
 }
 

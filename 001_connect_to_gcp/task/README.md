@@ -3,6 +3,8 @@
 **Goal:** get `terraform plan` talking to your GCP project without
 creating any billable resources.
 
+[Visit the Official Terraform + GCP Get Started Tutorial Here](https://developer.hashicorp.com/terraform/tutorials/gcp-get-started)
+
 ## Tasks
 
 1. Authenticate the gcloud CLI:

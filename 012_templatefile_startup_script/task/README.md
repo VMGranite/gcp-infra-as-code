@@ -3,6 +3,8 @@
 **Goal:** generate a VM's startup script from a template file with
 variables, instead of a raw heredoc string baked into `main.tf`.
 
+[Visit the Official Terraform templatefile() Function Documentation Here](https://developer.hashicorp.com/terraform/language/functions/templatefile)
+
 ## Tasks
 
 1. Reuse the VM/network/firewall pattern from

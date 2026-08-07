@@ -3,6 +3,8 @@
 **Goal:** practice least-privilege IAM instead of relying on the
 default compute service account.
 
+[Visit the Official google_service_account Resource Documentation Here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account)
+
 ## Tasks
 
 1. Define a `google_service_account` for your VM, e.g. `vm-runner`
@@ -11,7 +13,7 @@ default compute service account.
    `roles/storage.objectViewer` on a specific bucket via
    `google_storage_bucket_iam_member`, **not**
    `roles/storage.admin` on the whole project.
-3. Update the `google_compute_instance` from exercise 007 to use this
+3. Update the `google_compute_instance` from exercise 011 to use this
    service account instead of the default one:
    ```hcl
    service_account {

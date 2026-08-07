@@ -4,6 +4,8 @@
 changed outside of Terraform, and learn the two different ways to
 resolve it.
 
+[Visit the Official Terraform Refresh-Only Mode Tutorial Here](https://developer.hashicorp.com/terraform/tutorials/state/refresh)
+
 ## Tasks
 
 1. Define a `google_storage_bucket` with a label:

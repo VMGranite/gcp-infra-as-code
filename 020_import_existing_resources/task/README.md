@@ -4,6 +4,8 @@
 created by Terraform — under Terraform's management, using an
 `import` block.
 
+[Visit the Official Terraform Import Tutorial Here](https://developer.hashicorp.com/terraform/tutorials/state/state-import)
+
 ## Tasks
 
 1. Create a bucket **entirely outside Terraform**, simulating
