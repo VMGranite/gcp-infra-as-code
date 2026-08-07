@@ -30,7 +30,9 @@ matches your setup:
   environment is provisioned — often something like
   `qwiklabs-gcp-01-xxxxxxxx`.
 
-Write it down — you'll need it in every exercise folder.
+Write it down — you'll need it in every exercise folder. If none of
+the above turned up a project (e.g. `gcloud projects list` comes back
+empty), go to step 1 to create one, then come back here.
 
 ## 2. Authenticate
 
