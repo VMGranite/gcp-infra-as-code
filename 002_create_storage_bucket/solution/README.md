@@ -13,7 +13,7 @@ scale, they create and destroy in seconds (no multi-minute VM boot or
 network propagation to wait through), and they don't drag in any
 other concepts (networking, IAM, compute) you haven't learned yet. In
 the real world, buckets show up everywhere — static website hosting,
-storing Terraform state itself (see [011_remote_state](../../011_remote_state)),
+storing Terraform state itself (see [017_remote_state](../../017_remote_state)),
 data lake ingestion, backups, and build artifacts.
 
 ## Why these specific settings
@@ -43,4 +43,4 @@ data lake ingestion, backups, and build artifacts.
 - `terraform destroy` will fail if the bucket has objects in it,
   unless `force_destroy = true` is set (used in later exercises that
   add objects to a bucket, like
-  [004_upload_bucket_object](../../004_upload_bucket_object)).
+  [006_upload_bucket_object](../../006_upload_bucket_object)).
