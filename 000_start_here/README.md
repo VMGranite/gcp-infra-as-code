@@ -36,6 +36,10 @@ Write it down — you'll need it in every exercise folder. If none of
 the above turned up a project (e.g. `gcloud projects list` comes back
 empty), go to step 1 to create one, then come back here.
 
+Make sure to set your project in GCP as to not accidentally update the wrong project.
+`gcloud config set project training-project-XX` 
+
+
 ## 2. Authenticate
 
 Two separate logins are required, because they serve different tools:
