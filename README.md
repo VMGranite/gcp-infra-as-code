@@ -3,7 +3,7 @@
 Start with [000_start_here](000_start_here) — it walks through
 finding your GCP project ID, authenticating, and the `init`/`plan`/
 `apply`/`destroy` workflow you'll repeat in every exercise below.
-Then work through the twenty-two numbered exercises in order of
+Then work through the twenty-three numbered exercises in order of
 increasing difficulty. Each folder is self-contained: work inside it,
 don't reference other exercises' state.
 
@@ -26,20 +26,21 @@ Each numbered exercise folder has two subfolders:
 | [006_upload_bucket_object](006_upload_bucket_object/task) | Uploading a file to your bucket | resource dependencies |
 | [007_count_for_each](007_count_for_each/task) | count / for_each | multiple resources from one block |
 | [008_create_vpc_network](008_create_vpc_network/task) | A custom VPC network | `google_compute_network`/`subnetwork` |
-| [009_firewall_rules](009_firewall_rules/task) | Firewall rules | `google_compute_firewall`, least privilege |
-| [010_dynamic_blocks_conditionals](010_dynamic_blocks_conditionals/task) | Dynamic blocks and conditionals | `dynamic`, ternary expressions |
-| [011_create_vm](011_create_vm/task) | Deploy a VM | `google_compute_instance`, startup scripts |
-| [012_templatefile_startup_script](012_templatefile_startup_script/task) | templatefile() | rendering config files, `templatefile()` |
-| [013_service_accounts_iam](013_service_accounts_iam/task) | Service accounts and IAM | least-privilege IAM |
-| [014_secret_manager](014_secret_manager/task) | Secret Manager | sensitive variables, `google_secret_manager_secret` |
-| [015_provider_aliases](015_provider_aliases/task) | Provider aliases | `alias`, multi-region/multi-project |
-| [016_build_a_module](016_build_a_module/task) | Build a module | modules, `source`, reusability |
-| [017_remote_state](017_remote_state/task) | Remote state | `backend "gcs"`, state locking |
-| [018_configuration_drift](018_configuration_drift/task) | Configuration drift | `plan`, `apply -refresh-only`, state vs. reality |
-| [019_state_mv_rm](019_state_mv_rm/task) | terraform state mv / rm | refactoring addresses without destroying resources |
-| [020_import_existing_resources](020_import_existing_resources/task) | Migrating existing resources | `import` blocks, `-generate-config-out` |
-| [021_workspaces](021_workspaces/task) | Workspaces | `terraform.workspace`, environment separation |
-| [022_capstone_module](022_capstone_module/task) | Capstone: build a module | modules, capstone project |
+| [009_builtin_functions](009_builtin_functions/task) | Built-in functions | `cidrsubnet()`, `format()`, `jsonencode()` |
+| [010_firewall_rules](010_firewall_rules/task) | Firewall rules | `google_compute_firewall`, least privilege |
+| [011_dynamic_blocks_conditionals](011_dynamic_blocks_conditionals/task) | Dynamic blocks and conditionals | `dynamic`, ternary expressions |
+| [012_create_vm](012_create_vm/task) | Deploy a VM | `google_compute_instance`, startup scripts |
+| [013_templatefile_startup_script](013_templatefile_startup_script/task) | templatefile() | rendering config files, `templatefile()` |
+| [014_service_accounts_iam](014_service_accounts_iam/task) | Service accounts and IAM | least-privilege IAM |
+| [015_secret_manager](015_secret_manager/task) | Secret Manager | sensitive variables, `google_secret_manager_secret` |
+| [016_provider_aliases](016_provider_aliases/task) | Provider aliases | `alias`, multi-region/multi-project |
+| [017_build_a_module](017_build_a_module/task) | Build a module | modules, `source`, reusability |
+| [018_remote_state](018_remote_state/task) | Remote state | `backend "gcs"`, state locking |
+| [019_configuration_drift](019_configuration_drift/task) | Configuration drift | `plan`, `apply -refresh-only`, state vs. reality |
+| [020_state_mv_rm](020_state_mv_rm/task) | terraform state mv / rm | refactoring addresses without destroying resources |
+| [021_import_existing_resources](021_import_existing_resources/task) | Migrating existing resources | `import` blocks, `-generate-config-out` |
+| [022_workspaces](022_workspaces/task) | Workspaces | `terraform.workspace`, environment separation |
+| [023_capstone_module](023_capstone_module/task) | Capstone: build a module | modules, capstone project |
 
 ## General setup
 

@@ -134,16 +134,16 @@ debugging something a teammate or a CI pipeline created).
   `gcloud compute instances list`, `gcloud storage buckets list`) if
   you'd rather check from the terminal than the Console.
 
-A couple of exercises give you a direct link for free — `011_create_vm`'s
+A couple of exercises give you a direct link for free — `012_create_vm`'s
 solution outputs `vm_external_ip`, and `terraform output` after any
 `apply` will print whatever that exercise defined, which is often
 faster than navigating the Console at all.
 
-## 6. Manual ("clickops") resources — [018_configuration_drift](../018_configuration_drift) and [020_import_existing_resources](../020_import_existing_resources)
+## 6. Manual ("clickops") resources — [019_configuration_drift](../019_configuration_drift) and [021_import_existing_resources](../021_import_existing_resources)
 
 Two exercises deliberately have you touch GCP outside of Terraform —
-`018_configuration_drift` has you edit a resource by hand with
-`gcloud`, and `020_import_existing_resources` has you create a bucket
+`019_configuration_drift` has you edit a resource by hand with
+`gcloud`, and `021_import_existing_resources` has you create a bucket
 by hand before Terraform ever knows about it. Both are intentional:
 you can't learn how Terraform handles "someone changed this by hand"
 without actually doing it. But it means Terraform doesn't know about
@@ -162,7 +162,7 @@ up.
   Terraform-managed resources.
 - **Clean up depends on whether you finished the exercise:**
   - If a manually-created resource ends up successfully imported into
-    Terraform (as in `013`), it's now Terraform-managed — a normal
+    Terraform (as in `021`), it's now Terraform-managed — a normal
     `terraform destroy` handles it like anything else.
   - If you stop partway — created something by hand but never
     imported it, or abandoned the exercise — Terraform still doesn't
