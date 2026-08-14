@@ -51,7 +51,10 @@ the discussion question for why.
    terraform apply
    ```
 3. Define a `google_secret_manager_secret` (secret ID `app-secret`)
-   with automatic replication:
+   with automatic replication — Secret Manager stores encrypted
+   copies of the secret's value across multiple regions so it's still
+   available if one region has an outage; `auto {}` tells GCP to pick
+   suitable regions for you instead of you naming them:
    ```hcl
    replication {
      auto {}

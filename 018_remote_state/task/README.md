@@ -3,6 +3,18 @@
 **Goal:** move off local state and understand why teams don't commit
 `terraform.tfstate` to git.
 
+Every exercise so far has stored its `terraform.tfstate` — the record
+Terraform keeps of what it created (see
+[000_start_here](../../000_start_here) step 4 if that's unfamiliar)
+— as a plain file in that exercise's own folder. A **backend** is
+just where Terraform stores and reads that file from; `local` (the
+default, which you've been using without ever naming it) reads/writes
+a file on your own disk. This exercise switches to the `gcs` backend
+instead, which stores it in a GCS bucket — necessary the moment more
+than one person or machine needs to run `apply` against the same
+infrastructure, since a file on your laptop isn't something a
+teammate or a CI pipeline can read.
+
 [Visit the Official Terraform GCS Backend Documentation Here](https://developer.hashicorp.com/terraform/language/backend/gcs)
 
 ## Setup

@@ -33,7 +33,7 @@ default in production configs.
 
 ## Things worth noticing
 
-- The `depends_on = [google_project_service.apis]` on the network
+- The `depends_on = [google_project_service.compute]` on the network
   resource is necessary, not decorative: enabling an API is
   eventually consistent, and nothing about *referencing* the API
   enablement resource would otherwise tell Terraform to wait for it,

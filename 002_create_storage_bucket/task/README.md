@@ -7,6 +7,13 @@ Terraform.
 
 [Visit the Official google_storage_bucket Resource Documentation Here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket)
 
+`google_storage_bucket` creates a **Cloud Storage bucket** — GCP's
+object storage service, for storing arbitrary files (backups, static
+website assets, logs, VM images, anything) as opposed to a database
+or a filesystem attached to a VM. A "bucket" is the top-level
+container; individual files inside it are called "objects" (you'll
+upload one in [006_upload_bucket_object](../006_upload_bucket_object)).
+
 ## Tasks
 
 1. In `main.tf`, fill in the `google_storage_bucket` block:
@@ -32,6 +39,15 @@ Terraform.
    this resource type accepts under **Argument Reference**, marked
    `(Required)` or `(Optional)`, for whenever a `TODO` in this course
    names a resource but doesn't spell out every field.
+
+   A **region** is a geographic area where GCP has data centers —
+   `us-central1` (Iowa), `europe-west1` (Belgium), etc. Most of this
+   course defaults to `us-central1`; pick whatever's closest to you,
+   it doesn't otherwise matter for these exercises. (You'll also see
+   **zones** starting in [012_create_vm](../012_create_vm) — a zone
+   is one specific data center *within* a region, e.g.
+   `us-central1-a`. Regional resources like this bucket only need a
+   region; VMs need a specific zone.)
 3. Run `terraform init`, `terraform plan`, then `terraform apply`.
 4. Confirm the bucket exists:
    ```bash

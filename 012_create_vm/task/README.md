@@ -5,6 +5,32 @@ deploying a real VM with a startup script.
 
 [Visit the Official google_compute_instance Resource Documentation Here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance)
 
+## What's a VM?
+
+**Compute Engine** is GCP's virtual machine service — `google_compute_instance`
+creates one VM: a full virtual computer with its own CPU, memory,
+disk, and OS, running on Google's hardware. A few terms you'll hit in
+this exercise:
+
+- **`machine_type`** picks how much CPU/RAM the VM gets. `e2-micro`
+  is the smallest, cheapest tier — plenty for this exercise, and
+  eligible for GCP's [Always Free
+  tier](https://cloud.google.com/free/docs/free-cloud-features#compute)
+  (a fixed monthly allowance of certain resource types that's free
+  even outside any trial, currently one `e2-micro` instance in the
+  regions below) so this specific VM shouldn't cost anything under
+  normal use.
+- **Boot disk / image**: a VM needs a disk to boot from, and that
+  disk starts as a copy of an **image** — a pre-built OS snapshot.
+  `debian-cloud/debian-12` means the Debian 12 image published in
+  Google's own `debian-cloud` project; every VM you create from it
+  starts identical, then diverges as your startup script runs.
+- **Public IP**: a VM's network interface gets a private, internal-only
+  IP by default. Adding an empty `access_config {}` block requests an
+  *ephemeral* public IP too — reachable from the internet, which is
+  exactly what lets you `curl` or browse to it in step 4, and exactly
+  why the firewall rules from [010](../010_firewall_rules) matter here.
+
 ## Setup
 
 `variables.tf` already has `project_id`/`region` pre-filled — that

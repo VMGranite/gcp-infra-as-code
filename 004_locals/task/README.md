@@ -47,7 +47,11 @@ you've filled it in — see 003's README for why this course commits
 5. Use `local.name_prefix` to build the bucket's name instead of a
    variable directly — e.g. `"${local.name_prefix}-bucket"`.
 6. Add a second local, `common_labels`, that merges a fixed label
-   with one derived from a variable:
+   with one derived from a variable. GCP **labels** are just
+   key-value metadata you attach to a resource — they don't affect
+   how it behaves, but they're how you filter resources in the
+   Console or `gcloud`, and how a lot of teams break down billing
+   ("show me everything labeled `environment=prod`"):
    ```hcl
    locals {
      common_labels = merge(

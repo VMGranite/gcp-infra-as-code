@@ -31,7 +31,11 @@ given; uncomment each one and fill in the blanks.
    folder — see "Why we're committing terraform.tfvars" below.
 4. In `outputs.tf`, fill in:
    - `bucket_url` — the bucket's `gs://` URL
-   - `bucket_self_link` — the bucket's self link
+   - `bucket_self_link` — its **self link**: the full HTTPS URL to
+     this exact resource in the GCP API. Most GCP resource types
+     expose one; it's mainly useful for pointing *other* resources or
+     API calls at this one unambiguously, rather than something
+     you'd visit in a browser like the console URL.
 5. Run `terraform apply` and confirm both outputs print correctly.
 
 ## Success criteria

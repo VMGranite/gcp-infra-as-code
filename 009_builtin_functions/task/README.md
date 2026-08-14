@@ -29,7 +29,13 @@ values — just edit `project_id` to your real project ID.
    ```
    This carves `10.0.0.0/16` into `/24` blocks — `10.0.0.0/24`,
    `10.0.1.0/24`, `10.0.2.0/24` — one per subnet, without you
-   computing a single one by hand.
+   computing a single one by hand. (If the CIDR notation itself —
+   what the `/16` and `/24` mean — is unfamiliar, see
+   [008_create_vpc_network](../008_create_vpc_network)'s "What's a
+   VPC?" section; `network_cidr` here is exactly the same kind of
+   range you hand-typed there, just bigger, with `cidrsubnet()`
+   dividing it into smaller ranges instead of you doing that
+   arithmetic yourself.)
 2. Name each subnet with `format()` instead of string interpolation:
    ```hcl
    name = format("%s-%s-subnet", var.project_id, each.value)

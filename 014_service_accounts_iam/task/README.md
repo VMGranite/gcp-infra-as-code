@@ -7,6 +7,32 @@ default compute service account.
 
 [Visit the Official google_storage_bucket_iam_member Resource Documentation Here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket_iam)
 
+## What are IAM, service accounts, and roles?
+
+**IAM (Identity and Access Management)** is GCP's system for
+controlling who — or *what* — can do what. Every API call GCP
+receives, including every `terraform apply`, is made *as* some
+identity, and IAM decides whether that identity is allowed to do the
+thing it's asking for.
+
+A **service account** is an identity meant for a machine instead of a
+person — your VM needs to prove who it is when it reads from a
+bucket, just like you needed `gcloud auth` in
+[000_start_here](../../000_start_here), but "a person typing a
+password" doesn't make sense for a VM. Every VM already runs as
+*some* service account by default (a broad, shared one Compute Engine
+creates automatically); this exercise gives it its own, narrower one
+instead.
+
+A **role** is a named bundle of permissions you grant to an identity
+on a specific resource — `roles/storage.objectViewer` bundles up
+"can read objects in this bucket," `roles/storage.admin` bundles up
+far more (create/delete buckets, change permissions, etc.). Granting
+the broad role because it's easier is exactly the anti-pattern this
+exercise's Goal — least-privilege — pushes back on: give an identity
+only the specific roles it actually needs, on only the specific
+resources it needs them on.
+
 ## Setup
 
 `variables.tf` already has `project_id`/`region` pre-filled — that

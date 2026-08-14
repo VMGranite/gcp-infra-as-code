@@ -113,6 +113,18 @@ terraform destroy      # tears everything back down
   exercise.** Nothing here is designed to run continuously, and
   leaving resources up across exercises is how you end up paying for
   things you're done with.
+- Every `init`/`plan`/`apply` also reads and writes a local
+  `terraform.tfstate` file in that folder — Terraform's own record of
+  what it believes it created and with what configuration. `plan`
+  works by comparing your `.tf` files against this file, not against
+  GCP directly asking "does this exist yet?" every time. You won't
+  need to think about this file much until
+  [018_remote_state](../018_remote_state), which moves it off local
+  disk, and [019](../019_configuration_drift)–[021](../021_import_existing_resources),
+  which are entirely about what happens when this file and the real
+  world disagree — but it's been there, quietly, since your very
+  first `terraform apply` in
+  [002_create_storage_bucket](../002_create_storage_bucket).
 
 ## 5. Finding what you created in GCP
 
