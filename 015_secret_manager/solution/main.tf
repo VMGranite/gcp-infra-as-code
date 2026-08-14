@@ -10,18 +10,12 @@ terraform {
 }
 
 provider "google" {
-  project = "your-gcp-project-id" # TODO: replace with your project ID
-  region  = "us-central1"
-}
-
-variable "secret_value" {
-  description = "Value to store in Secret Manager. Pass with -var, never commit it."
-  type        = string
-  sensitive   = true
+  project = var.project_id
+  region  = var.region
 }
 
 resource "google_project_service" "secretmanager" {
-  project            = "your-gcp-project-id" # TODO: replace with your project ID
+  project            = var.project_id
   service            = "secretmanager.googleapis.com"
   disable_on_destroy = false
 }
@@ -43,7 +37,7 @@ resource "google_secret_manager_secret_version" "app_secret_version" {
 
 resource "google_service_account" "secret_reader" {
   account_id   = "secret-reader"
-  display_name = "Secret reader (exercise 009)"
+  display_name = "Secret reader (exercise 015)"
 }
 
 # Scoped to this one secret only — not project-wide secret access.

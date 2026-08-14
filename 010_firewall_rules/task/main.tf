@@ -10,11 +10,11 @@ terraform {
 }
 
 provider "google" {
-  project = "" # TODO
-  region  = "us-central1"
+  project = var.project_id
+  region  = var.region
 }
 
-# TODO: google_compute_network + google_compute_subnetwork (from exercise 005)
+# TODO: google_compute_network + google_compute_subnetwork (from exercise 008)
 
 # TODO: google_compute_firewall "allow_ssh_iap"
 # - source_ranges = ["35.235.240.0/20"]

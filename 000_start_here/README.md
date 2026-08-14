@@ -64,31 +64,50 @@ gcloud config set project YOUR_PROJECT_ID
 
 ## 3. Put your project ID into an exercise
 
-Each exercise's `task/main.tf` has a provider block with a blank
-project field:
+How you supply your project ID changes once, partway through the
+course:
 
-```hcl
-provider "google" {
-  project = "" # TODO: your project ID
-  region  = "us-central1"
-}
-```
+- **`001_connect_to_gcp` and `002_create_storage_bucket`** — before
+  variables are introduced, the provider block just has a blank
+  project field to fill in by hand:
+  ```hcl
+  provider "google" {
+    project = "" # TODO: your project ID
+    region  = "us-central1"
+  }
+  ```
+  Replace the empty string with your real project ID from step 1.
 
-Replace the empty string with your real project ID from step 1. This
-applies to every exercise **except `003_variables_and_outputs`**,
-where the project ID is a variable instead — for that one (and for
-several later exercises' solutions, which also use variables), either:
+- **`003_variables_and_outputs` onward** — every exercise from here
+  on has a `variables.tf` with `project_id` (required, no default)
+  and `region` (default `"us-central1"`) already declared, and the
+  provider block already references `var.project_id`/`var.region`.
+  You never edit the provider block itself again. Instead, each
+  exercise folder has a `terraform.tfvars.example` — copy it to
+  `terraform.tfvars` (gitignored, never committed) and fill in your
+  real project ID:
+  ```bash
+  cp terraform.tfvars.example terraform.tfvars
+  # edit terraform.tfvars and set project_id = "your-real-id"
+  ```
+  Every exercise folder is self-contained (see the note at the top of
+  the [root README](../README.md)), so you'll repeat this two-line
+  step in each new folder even though you just did it in the last
+  one — that's expected, not a sign you missed something.
 
-```bash
-cp terraform.tfvars.example terraform.tfvars
-# edit terraform.tfvars and set project_id = "your-real-id"
-```
-
-or pass it on the command line without creating a file:
-
-```bash
-terraform plan -var="project_id=your-real-id"
-```
+  You can also override a value for one command without touching the
+  file, e.g. to try a different project temporarily:
+  ```bash
+  terraform plan -var="project_id=some-other-id"
+  ```
+  [005_variable_validation](../005_variable_validation) uses this
+  `-var` override deliberately, to test bad input without disturbing
+  the good values already sitting in `terraform.tfvars`.
+  [015_secret_manager](../015_secret_manager) is the one exception in
+  the other direction — its `secret_value` variable is never added to
+  `terraform.tfvars` at all, because a secret shouldn't sit in a
+  plaintext file even a gitignored one; that exercise's README
+  explains why.
 
 ## 4. The Terraform workflow (repeat this in every exercise)
 

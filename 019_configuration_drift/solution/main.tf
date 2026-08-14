@@ -10,12 +10,12 @@ terraform {
 }
 
 provider "google" {
-  project = "your-gcp-project-id" # TODO: replace with your project ID
-  region  = "us-central1"
+  project = var.project_id
+  region  = var.region
 }
 
 resource "google_storage_bucket" "drift_demo" {
-  name                        = "your-gcp-project-id-drift-demo" # TODO: must be globally unique
+  name                        = "${var.project_id}-drift-demo"
   location                    = "US"
   force_destroy               = true
   uniform_bucket_level_access = true

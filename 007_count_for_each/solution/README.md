@@ -3,7 +3,7 @@
 ## What this creates
 
 - Three `google_storage_bucket`s — `dev`, `staging`, `prod` — from a
-  single `resource` block with `for_each = var.environments`.
+  single `resource` block with `for_each = var.bucket_environments`.
 
 ## Why for_each over count here
 

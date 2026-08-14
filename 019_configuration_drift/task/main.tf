@@ -10,8 +10,8 @@ terraform {
 }
 
 provider "google" {
-  project = "" # TODO: your project ID
-  region  = "us-central1"
+  project = var.project_id
+  region  = var.region
 }
 
 # TODO: google_storage_bucket "drift_demo"

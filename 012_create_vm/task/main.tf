@@ -10,12 +10,12 @@ terraform {
 }
 
 provider "google" {
-  project = "" # TODO
-  region  = "us-central1"
+  project = var.project_id
+  region  = var.region
   zone    = "us-central1-a"
 }
 
-# TODO: network, subnetwork, firewall rules (from exercises 005/006)
+# TODO: network, subnetwork, firewall rules (from exercises 008/010)
 
 # TODO: google_compute_instance "example"
 # - machine_type = "e2-micro"

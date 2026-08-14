@@ -10,31 +10,8 @@ terraform {
 }
 
 provider "google" {
-  project = "your-gcp-project-id" # TODO: replace with your project ID
-  region  = "us-central1"
-}
-
-variable "project_id" {
-  type    = string
-  default = "your-gcp-project-id" # TODO: replace with your project ID
-}
-
-variable "environment" {
-  type = string
-
-  validation {
-    condition     = contains(["dev", "staging", "prod"], var.environment)
-    error_message = "environment must be one of: dev, staging, prod."
-  }
-}
-
-variable "retention_days" {
-  type = number
-
-  validation {
-    condition     = var.retention_days > 0
-    error_message = "retention_days must be a positive number."
-  }
+  project = var.project_id
+  region  = var.region
 }
 
 resource "google_storage_bucket" "this" {

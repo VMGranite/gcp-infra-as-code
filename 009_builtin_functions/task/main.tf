@@ -10,22 +10,8 @@ terraform {
 }
 
 provider "google" {
-  project = "" # TODO: your project ID
-  region  = "us-central1"
-}
-
-variable "project_id" {
-  type = string
-}
-
-variable "network_cidr" {
-  type    = string
-  default = "10.0.0.0/16"
-}
-
-variable "subnet_names" {
-  type    = list(string)
-  default = ["dev", "staging", "prod"]
+  project = var.project_id
+  region  = var.region
 }
 
 # TODO: google_compute_network "this" (custom mode)

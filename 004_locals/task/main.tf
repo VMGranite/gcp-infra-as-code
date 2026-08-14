@@ -10,22 +10,8 @@ terraform {
 }
 
 provider "google" {
-  project = "" # TODO: your project ID
-  region  = "us-central1"
-}
-
-variable "project_id" {
-  type = string
-}
-
-variable "region" {
-  type    = string
-  default = "us-central1"
-}
-
-variable "environment" {
-  type    = string
-  default = "dev"
+  project = var.project_id
+  region  = var.region
 }
 
 # TODO: locals {

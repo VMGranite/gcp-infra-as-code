@@ -5,6 +5,16 @@ variables, instead of a raw heredoc string baked into `main.tf`.
 
 [Visit the Official Terraform templatefile() Function Documentation Here](https://developer.hashicorp.com/terraform/language/functions/templatefile)
 
+## Setup
+
+`variables.tf` already has `project_id`/`region` pre-filled, same as
+every exercise since [003_variables_and_outputs](../003_variables_and_outputs).
+
+```bash
+cp terraform.tfvars.example terraform.tfvars
+# edit terraform.tfvars and set project_id to your real project ID
+```
+
 ## Tasks
 
 1. Reuse the VM/network/firewall pattern from

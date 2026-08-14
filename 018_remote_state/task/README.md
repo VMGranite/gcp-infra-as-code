@@ -5,6 +5,23 @@
 
 [Visit the Official Terraform GCS Backend Documentation Here](https://developer.hashicorp.com/terraform/language/backend/gcs)
 
+## Setup
+
+`variables.tf` already has `project_id`/`region` pre-filled, same as
+every exercise since [003_variables_and_outputs](../003_variables_and_outputs).
+
+```bash
+cp terraform.tfvars.example terraform.tfvars
+# edit terraform.tfvars and set project_id to your real project ID
+```
+
+One exception this time: the `backend "gcs" { bucket = ... }` value
+in step 2 below **cannot** be `var.project_id` or come from
+`terraform.tfvars` — Terraform has to know where your state lives
+before it evaluates any variables, so backend config is always a
+hardcoded literal. Type your state bucket name directly into that
+block.
+
 ## Tasks
 
 1. Create a GCS bucket to hold state — you can do this once by hand

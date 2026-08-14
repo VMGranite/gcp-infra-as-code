@@ -6,10 +6,20 @@ aliased `provider` block.
 
 [Visit the Official Terraform Provider Configuration Documentation Here](https://developer.hashicorp.com/terraform/language/providers/configuration)
 
+## Setup
+
+`variables.tf` already has `project_id`/`region` pre-filled, same as
+every exercise since [003_variables_and_outputs](../003_variables_and_outputs).
+
+```bash
+cp terraform.tfvars.example terraform.tfvars
+# edit terraform.tfvars and set project_id to your real project ID
+```
+
 ## Tasks
 
-1. Keep your default `provider "google"` block (region
-   `us-central1`).
+1. Keep your default `provider "google"` block (region `var.region`,
+   `"us-central1"` by default).
 2. Add a second, **aliased** provider block for a different region:
    ```hcl
    provider "google" {

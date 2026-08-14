@@ -10,11 +10,9 @@ terraform {
 }
 
 provider "google" {
-  project = "" # TODO: your project ID
-  region  = "us-central1"
+  project = var.project_id
+  region  = var.region
 }
-
-# TODO: variable "secret_value" { sensitive = true, no default }
 
 # TODO: google_project_service "secretmanager" (secretmanager.googleapis.com)
 

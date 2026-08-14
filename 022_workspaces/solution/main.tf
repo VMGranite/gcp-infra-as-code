@@ -10,18 +10,13 @@ terraform {
 }
 
 provider "google" {
-  project = "your-gcp-project-id" # TODO: replace with your project ID
-  region  = "us-central1"
-}
-
-variable "project_id" {
-  type    = string
-  default = "your-gcp-project-id" # TODO: replace with your project ID
+  project = var.project_id
+  region  = var.region
 }
 
 resource "google_storage_bucket" "this" {
   name                        = "${var.project_id}-${terraform.workspace}-bucket"
-  location                    = "US"
+  location                    = var.region
   force_destroy               = true
   uniform_bucket_level_access = true
 

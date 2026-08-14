@@ -10,9 +10,13 @@ terraform {
 }
 
 provider "google" {
-  project = "" # TODO
-  region  = "us-central1"
+  project = var.project_id
+  region  = var.region
 }
+
+# TODO: google_project_service "compute" (compute.googleapis.com) —
+# optional if you already ran `gcloud services enable` by hand, see
+# README.md step 1
 
 # TODO: google_compute_network resource (auto_create_subnetworks = false)
 

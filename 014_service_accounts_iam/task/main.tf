@@ -10,8 +10,8 @@ terraform {
 }
 
 provider "google" {
-  project = "" # TODO
-  region  = "us-central1"
+  project = var.project_id
+  region  = var.region
   zone    = "us-central1-a"
 }
 
@@ -22,5 +22,7 @@ provider "google" {
 # TODO: google_storage_bucket_iam_member granting vm_runner
 #       roles/storage.objectViewer on the bucket above (not project-wide)
 
+# TODO: network, subnetwork, firewall rules (from exercise 012)
+
 # TODO: google_compute_instance using the vm_runner service account
-#       (see exercise 007 for the rest of the instance config)
+#       (see exercise 012 for the rest of the instance config)

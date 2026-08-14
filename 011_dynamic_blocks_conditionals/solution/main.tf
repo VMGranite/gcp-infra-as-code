@@ -10,28 +10,12 @@ terraform {
 }
 
 provider "google" {
-  project = "your-gcp-project-id" # TODO: replace with your project ID
-  region  = "us-central1"
-}
-
-variable "allowed_ports" {
-  type = list(object({
-    protocol = string
-    ports    = list(string)
-  }))
-  default = [
-    { protocol = "tcp", ports = ["22"] },
-    { protocol = "tcp", ports = ["80", "443"] },
-  ]
-}
-
-variable "environment" {
-  type    = string
-  default = "dev"
+  project = var.project_id
+  region  = var.region
 }
 
 resource "google_project_service" "compute" {
-  project            = "your-gcp-project-id" # TODO: replace with your project ID
+  project            = var.project_id
   service            = "compute.googleapis.com"
   disable_on_destroy = false
 }
@@ -46,7 +30,7 @@ resource "google_compute_network" "this" {
 resource "google_compute_subnetwork" "this" {
   name          = "dynamic-blocks-subnet"
   ip_cidr_range = "10.0.1.0/24"
-  region        = "us-central1"
+  region        = var.region
   network       = google_compute_network.this.id
 }
 

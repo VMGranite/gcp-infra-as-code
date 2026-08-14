@@ -4,7 +4,10 @@
 
 - One `google_storage_bucket`, labeled by `var.environment` and
   retained per `var.retention_days` — the same shape as earlier
-  exercises. What's new is the `validation` block on each variable.
+  exercises. What's new is the `validation` block added to the same
+  `environment` variable from
+  [004_locals](../004_locals) (not a new one), plus a fresh
+  `retention_days` variable with its own validation.
 
 ## Why
 

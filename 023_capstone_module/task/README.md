@@ -6,6 +6,22 @@ different inputs.
 
 [Visit the Official Terraform Modules Overview Documentation Here](https://developer.hashicorp.com/terraform/language/modules)
 
+## Setup
+
+The root `variables.tf` already has `project_id`/`region` pre-filled,
+same as every exercise since
+[003_variables_and_outputs](../003_variables_and_outputs). This is
+the same root-vs-module split from
+[017_build_a_module](../017_build_a_module): the root config reads
+`terraform.tfvars`, and passes what the module needs through the
+`module` block's own inputs — the module never reads the root's
+tfvars directly.
+
+```bash
+cp terraform.tfvars.example terraform.tfvars
+# edit terraform.tfvars and set project_id to your real project ID
+```
+
 ## Tasks
 
 1. Inside this folder, create a `modules/vm_with_network/` directory

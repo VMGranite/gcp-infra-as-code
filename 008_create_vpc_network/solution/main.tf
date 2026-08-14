@@ -10,12 +10,12 @@ terraform {
 }
 
 provider "google" {
-  project = "your-gcp-project-id" # TODO: replace with your project ID
-  region  = "us-central1"
+  project = var.project_id
+  region  = var.region
 }
 
 resource "google_project_service" "compute" {
-  project            = "your-gcp-project-id" # TODO: replace with your project ID
+  project            = var.project_id
   service            = "compute.googleapis.com"
   disable_on_destroy = false
 }
@@ -30,6 +30,6 @@ resource "google_compute_network" "example" {
 resource "google_compute_subnetwork" "example" {
   name          = "example-subnet"
   ip_cidr_range = "10.0.1.0/24"
-  region        = "us-central1"
+  region        = var.region
   network       = google_compute_network.example.id
 }

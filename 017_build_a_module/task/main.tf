@@ -10,19 +10,19 @@ terraform {
 }
 
 provider "google" {
-  project = "" # TODO: your project ID
-  region  = "us-central1"
+  project = var.project_id
+  region  = var.region
 }
 
 # TODO: module "logs" {
 #   source   = "./modules/bucket_with_lifecycle"
-#   name     = "your-gcp-project-id-logs"
+#   name     = "${var.project_id}-logs"
 #   age_days = 14
 # }
 
 # TODO: module "backups" {
 #   source   = "./modules/bucket_with_lifecycle"
-#   name     = "your-gcp-project-id-backups"
+#   name     = "${var.project_id}-backups"
 #   age_days = 90
 # }
 

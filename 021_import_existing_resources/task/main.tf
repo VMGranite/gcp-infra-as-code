@@ -10,8 +10,8 @@ terraform {
 }
 
 provider "google" {
-  project = "" # TODO: your project ID
-  region  = "us-central1"
+  project = var.project_id
+  region  = var.region
 }
 
 # TODO: after running `terraform plan -generate-config-out=generated.tf`

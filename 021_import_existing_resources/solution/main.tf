@@ -10,8 +10,8 @@ terraform {
 }
 
 provider "google" {
-  project = "your-gcp-project-id" # TODO: replace with your project ID
-  region  = "us-central1"
+  project = var.project_id
+  region  = var.region
 }
 
 # This is what `terraform plan -generate-config-out` produces for a

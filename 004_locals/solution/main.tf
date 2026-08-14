@@ -10,23 +10,8 @@ terraform {
 }
 
 provider "google" {
-  project = "your-gcp-project-id" # TODO: replace with your project ID
-  region  = "us-central1"
-}
-
-variable "project_id" {
-  type    = string
-  default = "your-gcp-project-id" # TODO: replace with your project ID
-}
-
-variable "region" {
-  type    = string
-  default = "us-central1"
-}
-
-variable "environment" {
-  type    = string
-  default = "dev"
+  project = var.project_id
+  region  = var.region
 }
 
 locals {

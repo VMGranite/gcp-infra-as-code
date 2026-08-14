@@ -5,6 +5,16 @@
 
 [Visit the Official google_compute_firewall Resource Documentation Here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_firewall)
 
+## Setup
+
+`variables.tf` already has `project_id`/`region` pre-filled, same as
+every exercise since [003_variables_and_outputs](../003_variables_and_outputs).
+
+```bash
+cp terraform.tfvars.example terraform.tfvars
+# edit terraform.tfvars and set project_id to your real project ID
+```
+
 ## Tasks
 
 1. Reuse the network from exercise 008 (copy it into this folder or

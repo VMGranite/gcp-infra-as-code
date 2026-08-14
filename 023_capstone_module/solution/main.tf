@@ -10,13 +10,13 @@ terraform {
 }
 
 provider "google" {
-  project = "your-gcp-project-id" # TODO: replace with your project ID
-  region  = "us-central1"
+  project = var.project_id
+  region  = var.region
   zone    = "us-central1-a"
 }
 
 resource "google_project_service" "compute" {
-  project            = "your-gcp-project-id" # TODO: replace with your project ID
+  project            = var.project_id
   service            = "compute.googleapis.com"
   disable_on_destroy = false
 }
@@ -25,7 +25,7 @@ module "dev" {
   source = "./modules/vm_with_network"
 
   name_prefix = "dev"
-  region      = "us-central1"
+  region      = var.region
   zone        = "us-central1-a"
   subnet_cidr = "10.0.1.0/24"
 
@@ -36,7 +36,7 @@ module "staging" {
   source = "./modules/vm_with_network"
 
   name_prefix = "staging"
-  region      = "us-central1"
+  region      = var.region
   zone        = "us-central1-a"
   subnet_cidr = "10.0.2.0/24"
 

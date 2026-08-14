@@ -10,15 +10,11 @@ terraform {
 }
 
 provider "google" {
-  project = "" # TODO: your project ID
-  region  = "us-central1"
+  project = var.project_id
+  region  = var.region
 }
 
-# TODO: variable "allowed_ports" (list of objects with protocol/ports)
-
-# TODO: variable "environment" (string, default "dev")
-
-# TODO: google_compute_network + google_compute_subnetwork (from 008/009)
+# TODO: google_compute_network + google_compute_subnetwork (from 008/010)
 
 # TODO: google_compute_firewall "this" with:
 # - dynamic "allow" { for_each = var.allowed_ports; content { ... } }

@@ -6,6 +6,16 @@ resolve it.
 
 [Visit the Official Terraform Refresh-Only Mode Tutorial Here](https://developer.hashicorp.com/terraform/tutorials/state/refresh)
 
+## Setup
+
+`variables.tf` already has `project_id`/`region` pre-filled, same as
+every exercise since [003_variables_and_outputs](../003_variables_and_outputs).
+
+```bash
+cp terraform.tfvars.example terraform.tfvars
+# edit terraform.tfvars and set project_id to your real project ID
+```
+
 ## Tasks
 
 1. Define a `google_storage_bucket` with a label:

@@ -6,6 +6,22 @@ already built into one, then reusing it twice.
 
 [Visit the Official Terraform Module Tutorial Here](https://developer.hashicorp.com/terraform/tutorials/modules/module-create)
 
+## Setup
+
+The root `variables.tf` already has `project_id`/`region` pre-filled,
+same as every exercise since
+[003_variables_and_outputs](../003_variables_and_outputs) — this
+applies to the root config that *calls* the module, same as always.
+The module itself gets its own separate `variables.tf` in step 1
+below, with inputs like `name`/`location`/`age_days` — modules never
+read your root `terraform.tfvars` directly, they only see what the
+root config passes in through the `module` block.
+
+```bash
+cp terraform.tfvars.example terraform.tfvars
+# edit terraform.tfvars and set project_id to your real project ID
+```
+
 ## Tasks
 
 1. Inside `modules/bucket_with_lifecycle/`, build a small module that

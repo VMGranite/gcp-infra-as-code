@@ -6,6 +6,16 @@ created by Terraform — under Terraform's management, using an
 
 [Visit the Official Terraform Import Tutorial Here](https://developer.hashicorp.com/terraform/tutorials/state/state-import)
 
+## Setup
+
+`variables.tf` already has `project_id`/`region` pre-filled, same as
+every exercise since [003_variables_and_outputs](../003_variables_and_outputs).
+
+```bash
+cp terraform.tfvars.example terraform.tfvars
+# edit terraform.tfvars and set project_id to your real project ID
+```
+
 ## Tasks
 
 1. Create a bucket **entirely outside Terraform**, simulating
@@ -20,11 +30,15 @@ created by Terraform — under Terraform's management, using an
      --uniform-bucket-level-access \
      --labels=clickops_resource=true
    ```
-2. In `imports.tf`, add an `import` block pointing at it:
+2. In `imports.tf`, add an `import` block pointing at it. Unlike the
+   `backend` block in [018_remote_state](../018_remote_state), an
+   `import` block *is* evaluated after your variables, so you can
+   (and should) build the `id` from `var.project_id` instead of
+   typing your project ID a second time:
    ```hcl
    import {
      to = google_storage_bucket.imported
-     id = "YOUR_PROJECT_ID-imported-demo"
+     id = "${var.project_id}-imported-demo"
    }
    ```
 3. Ask Terraform to generate a matching resource block for you,
@@ -37,9 +51,16 @@ created by Terraform — under Terraform's management, using an
    `google_storage_bucket "imported"` block into `generated.tf` that
    matches it — **nothing is created or changed**, this is still just
    a plan.
-4. Open `generated.tf` and read it. Move its contents into `main.tf`
-   (cleaning up anything you don't need to manage explicitly), then
-   delete `generated.tf`.
+4. Open `generated.tf` and read it. Notice that its `name` comes back
+   as a plain string literal, not `"${var.project_id}-imported-demo"`
+   — `-generate-config-out` writes exactly what the provider read
+   back from the real bucket, with no idea your project ID is a
+   variable elsewhere in this config. That's fine for this one field;
+   it's a reasonable prompt to go back and swap it for `var.project_id`
+   yourself once you've moved the block into `main.tf`, but it isn't
+   required for the exercise. Move the generated contents into
+   `main.tf` (cleaning up anything you don't need to manage
+   explicitly), then delete `generated.tf`.
 5. Run `terraform plan` again. It should now show **no changes** —
    proof the resource is fully and accurately described in your code.
 6. Confirm the bucket is genuinely under Terraform's management:

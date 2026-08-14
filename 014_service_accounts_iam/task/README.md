@@ -5,23 +5,35 @@ default compute service account.
 
 [Visit the Official google_service_account Resource Documentation Here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account)
 
+## Setup
+
+`variables.tf` already has `project_id`/`region` pre-filled, same as
+every exercise since [003_variables_and_outputs](../003_variables_and_outputs).
+
+```bash
+cp terraform.tfvars.example terraform.tfvars
+# edit terraform.tfvars and set project_id to your real project ID
+```
+
 ## Tasks
 
-1. Define a `google_service_account` for your VM, e.g. `vm-runner`
+1. Rebuild (or copy in) the network, subnet, firewall rules, and VM
+   from [012_create_vm](../012_create_vm).
+2. Define a `google_service_account` for your VM, e.g. `vm-runner`
    with a descriptive `display_name`.
-2. Grant it only the roles it actually needs — for example
+3. Grant it only the roles it actually needs — for example
    `roles/storage.objectViewer` on a specific bucket via
    `google_storage_bucket_iam_member`, **not**
    `roles/storage.admin` on the whole project.
-3. Update the `google_compute_instance` from exercise 012 to use this
-   service account instead of the default one:
+4. Update the `google_compute_instance` you rebuilt in step 1 to use
+   this service account instead of the default one:
    ```hcl
    service_account {
      email  = google_service_account.vm_runner.email
      scopes = ["cloud-platform"]
    }
    ```
-4. Run `terraform apply` and confirm from inside the VM that it can
+5. Run `terraform apply` and confirm from inside the VM that it can
    read from the bucket but not, say, list other projects' resources.
 
 ## Success criteria

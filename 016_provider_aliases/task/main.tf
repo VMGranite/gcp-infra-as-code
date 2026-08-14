@@ -9,13 +9,9 @@ terraform {
   }
 }
 
-variable "project_id" {
-  type = string
-}
-
 provider "google" {
   project = var.project_id
-  region  = "us-central1"
+  region  = var.region
 }
 
 # TODO: provider "google" { alias = "europe", project = var.project_id, region = "europe-west1" }

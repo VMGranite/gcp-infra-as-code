@@ -10,14 +10,12 @@ terraform {
 }
 
 provider "google" {
-  project = "" # TODO: your project ID
-  region  = "us-central1"
+  project = var.project_id
+  region  = var.region
   zone    = "us-central1-a"
 }
 
-# TODO: variable "welcome_message" (string, default "Hello from Terraform templatefile()!")
-
-# TODO: network, subnetwork, firewall rules (from 008/009/011)
+# TODO: network, subnetwork, firewall rules, VM (from exercise 012)
 
 # TODO: google_compute_instance "this" with:
 # metadata_startup_script = templatefile("${path.module}/templates/startup.sh.tftpl", {

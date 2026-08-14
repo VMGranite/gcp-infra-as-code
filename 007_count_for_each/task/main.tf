@@ -10,16 +10,10 @@ terraform {
 }
 
 provider "google" {
-  project = "" # TODO: your project ID
-  region  = "us-central1"
+  project = var.project_id
+  region  = var.region
 }
 
-variable "project_id" {
-  type = string
-}
-
-# TODO: variable "environments" { type = set(string), default = ["dev", "staging", "prod"] }
-
-# TODO: google_storage_bucket "this" with for_each = var.environments
+# TODO: google_storage_bucket "this" with for_each = var.bucket_environments
 
 # TODO: output "bucket_urls" mapping each environment to its bucket's url

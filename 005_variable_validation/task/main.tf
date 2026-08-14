@@ -10,19 +10,9 @@ terraform {
 }
 
 provider "google" {
-  project = "" # TODO: your project ID
-  region  = "us-central1"
+  project = var.project_id
+  region  = var.region
 }
-
-variable "project_id" {
-  type = string
-}
-
-# TODO: variable "environment" with a validation block restricting it
-# to "dev", "staging", or "prod"
-
-# TODO: variable "retention_days" with a validation block requiring
-# a positive number
 
 # TODO: google_storage_bucket "this" using var.environment in labels
 # and var.retention_days in a lifecycle_rule

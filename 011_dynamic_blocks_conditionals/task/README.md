@@ -8,6 +8,16 @@ instead of hardcoding it.
 
 [Visit the Official Terraform Conditional Expressions Documentation Here](https://developer.hashicorp.com/terraform/language/expressions/conditionals)
 
+## Setup
+
+`variables.tf` already has `project_id`/`region` pre-filled, same as
+every exercise since [003_variables_and_outputs](../003_variables_and_outputs).
+
+```bash
+cp terraform.tfvars.example terraform.tfvars
+# edit terraform.tfvars and set project_id to your real project ID
+```
+
 ## Tasks
 
 1. Reuse the network/subnet pattern from
@@ -38,10 +48,13 @@ instead of hardcoding it.
      }
    }
    ```
-4. Define a variable `environment` (string, default `"dev"`), and set
-   the firewall rule's `source_ranges` with a conditional expression:
-   narrow to the IAP range (`35.235.240.0/20`) in `"prod"`, and
-   `0.0.0.0/0` otherwise.
+4. Bring forward the validated `environment` variable from
+   [005_variable_validation](../005_variable_validation) — string,
+   default `"dev"`, with its `validation` block restricting it to
+   `dev`/`staging`/`prod` — rather than declaring a fresh, unvalidated
+   one. Set the firewall rule's `source_ranges` with a conditional
+   expression: narrow to the IAP range (`35.235.240.0/20`) in
+   `"prod"`, and `0.0.0.0/0` otherwise.
 5. Run `terraform apply`, then confirm the rule has **two** allowed
    entries:
    ```bash

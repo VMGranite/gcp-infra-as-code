@@ -10,23 +10,8 @@ terraform {
 }
 
 provider "google" {
-  project = "your-gcp-project-id" # TODO: replace with your project ID
-  region  = "us-central1"
-}
-
-variable "project_id" {
-  type    = string
-  default = "your-gcp-project-id" # TODO: replace with your project ID
-}
-
-variable "network_cidr" {
-  type    = string
-  default = "10.0.0.0/16"
-}
-
-variable "subnet_names" {
-  type    = list(string)
-  default = ["dev", "staging", "prod"]
+  project = var.project_id
+  region  = var.region
 }
 
 resource "google_project_service" "compute" {
@@ -47,7 +32,7 @@ resource "google_compute_subnetwork" "this" {
 
   name          = format("%s-%s-subnet", var.project_id, each.value)
   ip_cidr_range = cidrsubnet(var.network_cidr, 8, index(var.subnet_names, each.value))
-  region        = "us-central1"
+  region        = var.region
   network       = google_compute_network.this.id
 }
 

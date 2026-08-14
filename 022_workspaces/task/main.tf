@@ -10,12 +10,8 @@ terraform {
 }
 
 provider "google" {
-  project = "" # TODO: your project ID
-  region  = "us-central1"
-}
-
-variable "project_id" {
-  type = string
+  project = var.project_id
+  region  = var.region
 }
 
 # TODO: google_storage_bucket "this" whose name includes

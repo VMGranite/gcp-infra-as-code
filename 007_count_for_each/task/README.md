@@ -7,12 +7,26 @@ instead of copy-pasting a resource once per item.
 
 [Visit the Official Terraform count Tutorial Here](https://developer.hashicorp.com/terraform/tutorials/configuration-language/count)
 
+## Setup
+
+`variables.tf` already has `project_id`/`region` pre-filled, same as
+every exercise since [003_variables_and_outputs](../003_variables_and_outputs).
+
+```bash
+cp terraform.tfvars.example terraform.tfvars
+# edit terraform.tfvars and set project_id to your real project ID
+```
+
 ## Tasks
 
-1. Define a variable `environments` — a set of strings, default
-   `["dev", "staging", "prod"]`.
+1. Define a variable `bucket_environments` — a set of strings, default
+   `["dev", "staging", "prod"]`. This is deliberately a different
+   variable from the singular `environment` you defined in
+   [004_locals](../004_locals) / [005_variable_validation](../005_variable_validation)
+   — that one is a single value; this one is the *list* you're about
+   to fan out over with `for_each`.
 2. Define **one** `google_storage_bucket` resource using
-   `for_each = var.environments`, naming each bucket
+   `for_each = var.bucket_environments`, naming each bucket
    `"${var.project_id}-${each.value}-bucket"`.
 3. Add an output that maps each environment to its bucket's URL:
    ```hcl
@@ -24,8 +38,8 @@ instead of copy-pasting a resource once per item.
    from that one resource block.
 5. Now, as a thought experiment (don't actually do this to your real
    config), imagine rewriting the same resource with
-   `count = length(var.environments)` and `name =
-   "${var.project_id}-${var.environments[count.index]}-bucket"`
+   `count = length(var.bucket_environments)` and `name =
+   "${var.project_id}-${var.bucket_environments[count.index]}-bucket"`
    instead. Run `terraform plan` after removing `"staging"` from the
    middle of the list in the `for_each` version, then imagine doing
    the same removal in the `count` version — what would `terraform

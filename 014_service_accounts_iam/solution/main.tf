@@ -10,19 +10,19 @@ terraform {
 }
 
 provider "google" {
-  project = "your-gcp-project-id" # TODO: replace with your project ID
-  region  = "us-central1"
+  project = var.project_id
+  region  = var.region
   zone    = "us-central1-a"
 }
 
 resource "google_project_service" "compute" {
-  project            = "your-gcp-project-id" # TODO: replace with your project ID
+  project            = var.project_id
   service            = "compute.googleapis.com"
   disable_on_destroy = false
 }
 
 resource "google_storage_bucket" "example" {
-  name                        = "your-gcp-project-id-exercise-008" # TODO: must be globally unique
+  name                        = "${var.project_id}-exercise-014"
   location                    = "US"
   force_destroy               = true
   uniform_bucket_level_access = true
@@ -30,7 +30,7 @@ resource "google_storage_bucket" "example" {
 
 resource "google_service_account" "vm_runner" {
   account_id   = "vm-runner"
-  display_name = "VM runner (exercise 008)"
+  display_name = "VM runner (exercise 014)"
 }
 
 # Scoped to this one bucket only — not project-wide storage admin.
@@ -50,7 +50,7 @@ resource "google_compute_network" "example" {
 resource "google_compute_subnetwork" "example" {
   name          = "example-subnet"
   ip_cidr_range = "10.0.1.0/24"
-  region        = "us-central1"
+  region        = var.region
   network       = google_compute_network.example.id
 }
 

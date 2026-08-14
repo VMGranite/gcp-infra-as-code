@@ -10,8 +10,8 @@ terraform {
 }
 
 provider "google" {
-  project = "" # TODO
-  region  = "us-central1"
+  project = var.project_id
+  region  = var.region
   zone    = "us-central1-a"
 }
 
