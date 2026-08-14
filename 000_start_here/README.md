@@ -4,6 +4,12 @@ Do this once before starting the following exercises.
 
 [Visit the Official Terraform + GCP Get Started Tutorial Here](https://developer.hashicorp.com/terraform/tutorials/gcp-get-started)
 
+You don't need to know any Terraform syntax to start, even if you've
+never written a line of HCL (Terraform's config language) before.
+[001_connect_to_gcp](../001_connect_to_gcp) teaches the shape of a
+Terraform block using the actual file you'll be editing, right when
+you need it — nothing here in 000 assumes you already know it.
+
 ## 1. Find your GCP project ID
 
 Terraform needs to know exactly which GCP project to create resources
@@ -64,50 +70,22 @@ gcloud config set project YOUR_PROJECT_ID
 
 ## 3. Put your project ID into an exercise
 
-How you supply your project ID changes once, partway through the
-course:
+Exactly how you do this changes a couple of times as you move through
+the course. You don't need to memorize any of it now — each exercise
+below tells you what to do and explains why, right when you get
+there:
 
-- **`001_connect_to_gcp` and `002_create_storage_bucket`** — before
-  variables are introduced, the provider block just has a blank
-  project field to fill in by hand:
-  ```hcl
-  provider "google" {
-    project = "" # TODO: your project ID
-    region  = "us-central1"
-  }
-  ```
-  Replace the empty string with your real project ID from step 1.
+- **001 and 002** — a blank field to fill in directly in `main.tf`.
+- **003 and 004** — a `terraform.tfvars` file you create by hand and
+  commit, same as any other file in this course.
+- **005 onward** — `terraform.tfvars` is already there for you,
+  committed with a placeholder value — just edit it.
 
-- **`003_variables_and_outputs` onward** — every exercise from here
-  on has a `variables.tf` with `project_id` (required, no default)
-  and `region` (default `"us-central1"`) already declared, and the
-  provider block already references `var.project_id`/`var.region`.
-  You never edit the provider block itself again. Instead, each
-  exercise folder has a `terraform.tfvars.example` — copy it to
-  `terraform.tfvars` (gitignored, never committed) and fill in your
-  real project ID:
-  ```bash
-  cp terraform.tfvars.example terraform.tfvars
-  # edit terraform.tfvars and set project_id = "your-real-id"
-  ```
-  Every exercise folder is self-contained (see the note at the top of
-  the [root README](../README.md)), so you'll repeat this two-line
-  step in each new folder even though you just did it in the last
-  one — that's expected, not a sign you missed something.
-
-  You can also override a value for one command without touching the
-  file, e.g. to try a different project temporarily:
-  ```bash
-  terraform plan -var="project_id=some-other-id"
-  ```
-  [005_variable_validation](../005_variable_validation) uses this
-  `-var` override deliberately, to test bad input without disturbing
-  the good values already sitting in `terraform.tfvars`.
-  [015_secret_manager](../015_secret_manager) is the one exception in
-  the other direction — its `secret_value` variable is never added to
-  `terraform.tfvars` at all, because a secret shouldn't sit in a
-  plaintext file even a gitignored one; that exercise's README
-  explains why.
+Just follow whatever that exercise's own README says. One value in
+the whole course is the exception to "commit it like everything
+else": [015_secret_manager](../015_secret_manager) introduces an
+actually-sensitive value, and that exercise explains why it's handled
+completely differently.
 
 ## 4. The Terraform workflow (repeat this in every exercise)
 

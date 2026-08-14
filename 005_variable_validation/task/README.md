@@ -8,14 +8,20 @@ Terraform ever talks to GCP.
 
 ## Setup
 
-Same pattern as every exercise since
-[003_variables_and_outputs](../003_variables_and_outputs):
-`variables.tf` has `project_id`/`region` pre-filled.
+`variables.tf` has `project_id`/`region` pre-filled, same as every
+exercise since [003_variables_and_outputs](../003_variables_and_outputs).
+What's new starting here: this folder ships a `terraform.tfvars`
+already committed, with placeholder values — edit it instead of
+writing one from scratch:
 
-```bash
-cp terraform.tfvars.example terraform.tfvars
-# edit terraform.tfvars and set project_id to your real project ID
 ```
+project_id  = "your-gcp-project-id"  # TODO: replace with your project ID
+region      = "us-central1"
+environment = "dev"
+```
+
+Add `retention_days = 30` to it once you've defined that variable in
+step 2 below.
 
 ## Tasks
 

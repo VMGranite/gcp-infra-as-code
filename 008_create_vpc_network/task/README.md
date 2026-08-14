@@ -5,18 +5,18 @@ until you define it.
 
 [Visit the Official google_compute_network Resource Documentation Here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network)
 
+[Visit the Official google_compute_subnetwork Resource Documentation Here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_subnetwork)
+
 ## Setup
 
-`variables.tf` already has `project_id`/`region` pre-filled, same as
-every exercise since [003_variables_and_outputs](../003_variables_and_outputs).
-Every exercise folder is self-contained, so this repeats even though
-you did it in the last exercise too — it's a cheap two-line step, and
-it means this folder still works if you come back to it on its own.
-
-```bash
-cp terraform.tfvars.example terraform.tfvars
-# edit terraform.tfvars and set project_id to your real project ID
-```
+`variables.tf` already has `project_id`/`region` pre-filled — that
+part goes back to [003_variables_and_outputs](../003_variables_and_outputs).
+`terraform.tfvars` is already here too, committed with placeholder
+values — just edit `project_id` to your real project ID (see 003's
+README for why this file is committed instead of gitignored). Every
+exercise folder is self-contained, so you'll edit a fresh copy of
+this file in each new folder even though you just did it in the last
+one — that's expected, not a sign you missed something.
 
 ## Tasks
 

@@ -43,3 +43,8 @@ write as the config grows; they get more valuable.
   syntactically valid but nonsensical value (a real region string
   that doesn't have the resource type available) still won't be
   caught until GCP rejects it during `apply`.
+- This is the first exercise where `terraform.tfvars` comes
+  pre-committed with placeholder values instead of you writing it
+  from scratch, purely to save typing once the file itself is
+  familiar — see [003_variables_and_outputs](../../003_variables_and_outputs)
+  for why it's committed at all rather than gitignored.

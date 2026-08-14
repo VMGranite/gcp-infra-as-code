@@ -9,16 +9,20 @@ and reuse it, instead of re-typing the same expression everywhere.
 
 This exercise reuses the pattern from
 [003_variables_and_outputs](../003_variables_and_outputs): a
-`variables.tf` for inputs and a `terraform.tfvars` (never committed)
-for your real values. `variables.tf` already has `project_id` and
-`region` declared for you — that part doesn't change from exercise
-to exercise, so from here on you'll find it pre-filled and only the
-new variables for that exercise's concept left as `TODO`s.
+`variables.tf` for inputs and a committed `terraform.tfvars` for your
+real values. `variables.tf` already has `project_id` and `region`
+declared for you — that part doesn't change from exercise to
+exercise, so from here on you'll find it pre-filled and only the new
+variables for that exercise's concept left as `TODO`s.
 
-```bash
-cp terraform.tfvars.example terraform.tfvars
-# edit terraform.tfvars and set project_id to your real project ID
+Create `terraform.tfvars` in this folder by hand, same as 003:
 ```
+project_id = "your-real-project-id"
+region     = "us-central1"
+```
+(you'll add `environment` to it in step 3 below). Commit it once
+you've filled it in — see 003's README for why this course commits
+`terraform.tfvars` instead of gitignoring it.
 
 ## Tasks
 

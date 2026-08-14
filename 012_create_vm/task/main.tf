@@ -17,13 +17,29 @@ provider "google" {
 
 # TODO: network, subnetwork, firewall rules (from exercises 008/010)
 
-# TODO: google_compute_instance "example"
-# - machine_type = "e2-micro"
-# - tags = ["ssh", "http-server"]
-# - boot_disk { initialize_params { image = "debian-cloud/debian-12" } }
-# - network_interface { subnetwork = ...; access_config {} }
-# - metadata_startup_script = <<-EOT
+# TODO: resource "google_compute_instance" "example" {
+#   name         = "___"
+#   machine_type = "e2-micro"
+#   zone         = "us-central1-a"
+#   tags         = ["ssh", "http-server"]
+#
+#   boot_disk {
+#     initialize_params {
+#       image = "debian-cloud/debian-12"
+#     }
+#   }
+#
+#   network_interface {
+#     subnetwork = ___  # reference the subnetwork resource above
+#     access_config {}  # empty block — this is what gets you a public IP
+#   }
+#
+#   metadata_startup_script = <<-EOT
 #     #!/bin/bash
 #     apt-get update
 #     apt-get install -y apache2
 #   EOT
+# }
+#
+# Optional: the google_compute_instance docs page above has many more
+# arguments under Argument Reference, e.g. `labels`, `metadata`.

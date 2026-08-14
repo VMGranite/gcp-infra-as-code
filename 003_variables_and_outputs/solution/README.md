@@ -39,7 +39,10 @@ configs that need to reference what this one created).
   `*.auto.tfvars`, environment variables (`TF_VAR_*`), then the
   variable's `default`. Worth knowing once you're juggling more than
   one way to supply a value.
-- `terraform.tfvars` is gitignored on purpose — it often ends up
-  holding environment-specific or sensitive values, so
-  `terraform.tfvars.example` exists to document the *shape* without
-  committing real values.
+- `terraform.tfvars` is committed here, same as every other file —
+  see the README's "Why we're committing terraform.tfvars" section.
+  None of `project_id`/`region`/`bucket_name` are sensitive, so
+  there's no reason to hide them.
+  [015_secret_manager](../../015_secret_manager) is where a value
+  that actually needs hiding shows up, and it's handled completely
+  differently.

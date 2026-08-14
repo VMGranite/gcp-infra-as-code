@@ -11,9 +11,17 @@ terraform {
 }
 
 provider "google" {
-  # TODO: set project (and optionally region/zone)
+  # TODO: project = "___" (optionally region/zone too)
 }
 
-# TODO: add a `data "google_project" "this"` block
+# TODO: data "google_project" "this" {
+#   # No arguments required — an empty block looks up the provider's
+#   # default project. See the Argument Reference on the docs page
+#   # above for what else this data source accepts.
+# }
 
-# TODO: add an output that prints the project's display name
+# TODO: output "project_display_name" {
+#   value = data.google_project.this.___
+#   # See the Attributes Reference on the docs page above for the
+#   # exact attribute name that holds the human-readable project name.
+# }

@@ -9,17 +9,14 @@ typing each one, `format()` for consistent resource names, and
 
 ## Setup
 
-`variables.tf` already has `project_id`/`region` pre-filled (same as
-every exercise since [003_variables_and_outputs](../003_variables_and_outputs)),
+`variables.tf` already has `project_id`/`region` pre-filled (that
+part goes back to [003_variables_and_outputs](../003_variables_and_outputs)),
 plus `network_cidr` (default `"10.0.0.0/16"`, the parent block you'll
 carve subnets out of) and `subnet_names` (default `["dev", "staging",
 "prod"]`) already defined — those two aren't new variable-declaration
 practice, they're just the input this exercise's functions operate on.
-
-```bash
-cp terraform.tfvars.example terraform.tfvars
-# edit terraform.tfvars and set project_id to your real project ID
-```
+`terraform.tfvars` is already here too, committed with placeholder
+values — just edit `project_id` to your real project ID.
 
 ## Tasks
 

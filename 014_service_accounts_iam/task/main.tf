@@ -15,14 +15,28 @@ provider "google" {
   zone    = "us-central1-a"
 }
 
-# TODO: google_storage_bucket resource (something to scope IAM to)
+# TODO: google_storage_bucket resource (something to scope IAM to —
+# same shape as earlier exercises)
 
-# TODO: google_service_account "vm_runner"
+# TODO: resource "google_service_account" "vm_runner" {
+#   account_id   = "vm-runner"
+#   display_name = "___"
+# }
 
-# TODO: google_storage_bucket_iam_member granting vm_runner
-#       roles/storage.objectViewer on the bucket above (not project-wide)
+# TODO: resource "google_storage_bucket_iam_member" "vm_runner_object_viewer" {
+#   bucket = ___  # reference the bucket resource above
+#   role   = "roles/storage.objectViewer"
+#   member = "serviceAccount:${___}"  # the service account's `email` attribute
+#   # GCP IAM member strings always need a type prefix (serviceAccount:,
+#   # user:, group:, etc.) — see the Argument Reference on the docs
+#   # page above.
+# }
 
 # TODO: network, subnetwork, firewall rules (from exercise 012)
 
 # TODO: google_compute_instance using the vm_runner service account
-#       (see exercise 012 for the rest of the instance config)
+#       (see exercise 012 for the rest of the instance config) — add:
+#   service_account {
+#     email  = google_service_account.vm_runner.email
+#     scopes = ["cloud-platform"]
+#   }

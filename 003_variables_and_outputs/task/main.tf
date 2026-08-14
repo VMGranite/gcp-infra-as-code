@@ -10,7 +10,14 @@ terraform {
 }
 
 provider "google" {
-  # TODO: reference var.project_id and var.region
+  # TODO: project = var.project_id
+  # TODO: region  = var.region
 }
 
-# TODO: define a google_storage_bucket resource using var.bucket_name
+# TODO: resource "google_storage_bucket" "my_bucket" {
+#   # same shape as 002_create_storage_bucket — but instead of literal
+#   # strings, wire it to your new variables:
+#   name                        = var.bucket_name
+#   location                    = var.region
+#   uniform_bucket_level_access = true
+# }

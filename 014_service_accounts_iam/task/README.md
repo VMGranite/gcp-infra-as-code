@@ -5,15 +5,15 @@ default compute service account.
 
 [Visit the Official google_service_account Resource Documentation Here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account)
 
+[Visit the Official google_storage_bucket_iam_member Resource Documentation Here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket_iam)
+
 ## Setup
 
-`variables.tf` already has `project_id`/`region` pre-filled, same as
-every exercise since [003_variables_and_outputs](../003_variables_and_outputs).
-
-```bash
-cp terraform.tfvars.example terraform.tfvars
-# edit terraform.tfvars and set project_id to your real project ID
-```
+`variables.tf` already has `project_id`/`region` pre-filled — that
+part goes back to [003_variables_and_outputs](../003_variables_and_outputs).
+`terraform.tfvars` is already here too, committed with placeholder
+values — just edit `project_id` to your real project ID (see 003's
+README for why this file is committed instead of gitignored).
 
 ## Tasks
 

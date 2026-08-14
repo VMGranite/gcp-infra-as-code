@@ -5,15 +5,15 @@ bucket and an object inside it in the same configuration.
 
 [Visit the Official Terraform Resource Dependencies Tutorial Here](https://developer.hashicorp.com/terraform/tutorials/configuration-language/dependencies)
 
+[Visit the Official google_storage_bucket_object Resource Documentation Here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket_object)
+
 ## Setup
 
-`variables.tf` already has `project_id`/`region` pre-filled, same as
-every exercise since [003_variables_and_outputs](../003_variables_and_outputs).
-
-```bash
-cp terraform.tfvars.example terraform.tfvars
-# edit terraform.tfvars and set project_id to your real project ID
-```
+`variables.tf` already has `project_id`/`region` pre-filled — that
+part goes back to [003_variables_and_outputs](../003_variables_and_outputs).
+`terraform.tfvars` is already here too, committed with placeholder
+values — just edit `project_id` to your real project ID (see 003's
+README for why this file is committed instead of gitignored).
 
 ## Tasks
 

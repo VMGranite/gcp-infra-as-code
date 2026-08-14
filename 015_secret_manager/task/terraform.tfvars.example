@@ -1,7 +1,0 @@
-project_id = "your-gcp-project-id"
-region     = "us-central1"
-
-# secret_value is NOT here on purpose. Even a gitignored tfvars file
-# is a plaintext file sitting on disk (and easy to accidentally
-# commit or share) — pass secrets with -var or TF_VAR_secret_value
-# instead, never save them to a file. See README.md.

@@ -10,6 +10,6 @@ variable "region" {
 }
 
 # TODO: variable "secret_value" { sensitive = true, no default }
-# Deliberately NOT added to terraform.tfvars.example or
-# terraform.tfvars — see README.md for why secrets get a different
-# workflow than project_id/region.
+# Deliberately NOT added to terraform.tfvars, unlike every other
+# variable in this course — see README.md for why secrets get a
+# different workflow than project_id/region.
