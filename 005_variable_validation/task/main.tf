@@ -16,3 +16,25 @@ provider "google" {
 
 # TODO: google_storage_bucket "this" using var.environment in labels
 # and var.retention_days in a lifecycle_rule
+
+provider "google" {
+  project = var.project_id
+  region  = var.region
+}
+
+locals {
+  name_prefix = "${var.project_id}-${var.region}"
+
+  common_labels = merge(
+    { managed_by = "terraform" },
+    { environment = var.environment }
+  )
+}
+
+resource "google_storage_bucket" "this" {
+  name                        = "${local.name_prefix}-bucket"
+  location                    = var.region
+  force_destroy               = true
+  uniform_bucket_level_access = true
+  labels                      = local.common_labels
+}

@@ -10,9 +10,10 @@ terraform {
 }
 
 provider "google" {
-  # TODO: project = var.project_id
-  # TODO: region  = var.region
+  project = "var.project_name" # TODO: your project ID
+  region  = "var.region"
 }
+
 
 # TODO: resource "google_storage_bucket" "my_bucket" {
 #   # same shape as 002_create_storage_bucket — but instead of literal
@@ -21,3 +22,8 @@ provider "google" {
 #   location                    = var.region
 #   uniform_bucket_level_access = true
 # }
+resource "google_storage_bucket" "my_bucket" {
+  name="var.bucket_name"
+  location="var.region"
+  uniform_bucket_level_access =  true
+}

@@ -9,14 +9,24 @@ variable "region" {
   default     = "us-central1"
 }
 
-# TODO: this is the same "environment" variable you defined in
-# 004_locals — copy it forward (string, default "dev"), then add a
-# validation block that only allows "dev", "staging", or "prod":
-#
-#   validation {
-#     condition     = contains(["dev", "staging", "prod"], var.environment)
-#     error_message = "environment must be one of: dev, staging, prod."
-#   }
+variable "environment" {
+  description = "Deployment environment, used to build common_labels. Gets a validation block added in 005_variable_validation."
+  type    = string
+  default = "dev"
 
-# TODO: variable "retention_days" (number, default 30) with a
-# validation block requiring a positive number
+  validation {
+    condition     = contains(["dev", "staging", "prod"], var.environment)
+    error_message = "environment must be one of: dev, staging, prod."
+  }
+}
+
+variable "retention_days" {
+  description = "Number of days before objects in this bucket are deleted."
+  type        = number
+  default     = 30
+
+  validation {
+    condition     = var.retention_days > 0
+    error_message = "retention_days must be a positive number."
+  }
+}

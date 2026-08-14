@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "google" {
-  project = "your-gcp-project-id" # TODO: replace with your project ID
+  project = " training-project-32" # TODO: replace with your project ID
   region  = "us-central1"
 }
 

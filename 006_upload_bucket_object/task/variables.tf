@@ -1,10 +1,14 @@
 variable "project_id" {
-  description = "GCP project ID to deploy resources into."
-  type        = string
+    type        = string
+    description = "GCP project ID to deploy resources into."
 }
 
 variable "region" {
-  description = "Region for the bucket and provider default."
-  type        = string
-  default     = "us-central1"
+    type    = string
+    description = "Region for the bucket and provider default."
+    default = "us-central1"
+}
+
+variable "bucket_name" {
+    type = string
 }

@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "google" {
-  project = "" # TODO: your project ID
+  project = "training-project-32-377beb" # TODO: your project ID
   region  = "us-central1"
 }
 
@@ -23,3 +23,8 @@ provider "google" {
 #   # everything else this resource accepts — you'll use two more of
 #   # them for the stretch goal below.
 # }
+resource "google_storage_bucket" "my_bucket" {
+  name="training-project-32-bucket"
+  location="us-central1"
+  uniform_bucket_level_access =  true
+}
