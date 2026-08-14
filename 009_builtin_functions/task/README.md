@@ -32,10 +32,38 @@ values — just edit `project_id` to your real project ID.
    computing a single one by hand. (If the CIDR notation itself —
    what the `/16` and `/24` mean — is unfamiliar, see
    [008_create_vpc_network](../008_create_vpc_network)'s "What's a
-   VPC?" section; `network_cidr` here is exactly the same kind of
-   range you hand-typed there, just bigger, with `cidrsubnet()`
-   dividing it into smaller ranges instead of you doing that
-   arithmetic yourself.)
+   VPC?" section first; `network_cidr` here is exactly the same kind
+   of range you hand-typed there, just bigger.)
+
+   **What it's for:** in [008](../008_create_vpc_network) you picked
+   one `/24` range and typed it by hand — fine for one subnet, but
+   this exercise needs three, and they can't overlap. Hand-typing
+   `10.0.0.0/24`, `10.0.1.0/24`, `10.0.2.0/24` yourself means doing
+   binary arithmetic in your head and hoping you don't fat-finger a
+   range that overlaps another one — and if `network_cidr` ever
+   changes (`10.0.0.0/16` → `10.1.0.0/16`), every hand-typed subnet
+   is now wrong and has to be redone by hand too. `cidrsubnet()`
+   computes a subnet range *from* the parent block instead, so it's
+   always correct and non-overlapping, and it updates itself
+   automatically if `network_cidr` ever changes. That's the same
+   "derive it instead of typing it" idea as `local.name_prefix` back
+   in [004_locals](../004_locals), just applied to IP math instead of
+   a string.
+
+   `cidrsubnet(prefix, newbits, netnum)` takes three arguments:
+   - **`prefix`** — the CIDR block you're carving up. Here,
+     `var.network_cidr` (`10.0.0.0/16`).
+   - **`newbits`** — how many *more* bits to fix, shrinking the range.
+     `8` here means `/16 + 8 = /24`: each resulting subnet is a `/24`.
+     (Bigger `newbits` = smaller subnets, more of them possible.)
+   - **`netnum`** — *which* of the resulting `/24` subnets you want,
+     as a plain number starting at `0`. `netnum = 0` gives you
+     `10.0.0.0/24`, `netnum = 1` gives you `10.0.1.0/24`, and so on —
+     it's counting subnets within the parent range, not an IP address
+     itself. That's why step 1's call wraps
+     `index(var.subnet_names, each.value)` around it: `index()` turns
+     `"staging"`'s position in the list (`1`) into the `netnum` that
+     picks the second `/24` block.
 2. Name each subnet with `format()` instead of string interpolation:
    ```hcl
    name = format("%s-%s-subnet", var.project_id, each.value)
