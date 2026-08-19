@@ -3,7 +3,7 @@
 Start with [000_start_here](000_start_here) — it walks through
 finding your GCP project ID, authenticating, and the `init`/`plan`/
 `apply`/`destroy` workflow you'll repeat in every exercise below.
-Then work through the twenty-three numbered exercises in order of
+Then work through the twenty-two numbered exercises in order of
 increasing difficulty. Each folder is self-contained: work inside it,
 don't reference other exercises' state.
 
@@ -39,8 +39,7 @@ Each numbered exercise folder has two subfolders:
 | [019_configuration_drift](019_configuration_drift/task) | Configuration drift | `plan`, `apply -refresh-only`, state vs. reality |
 | [020_state_mv_rm](020_state_mv_rm/task) | terraform state mv / rm | refactoring addresses without destroying resources |
 | [021_import_existing_resources](021_import_existing_resources/task) | Migrating existing resources | `import` blocks, `-generate-config-out` |
-| [022_workspaces](022_workspaces/task) | Workspaces | `terraform.workspace`, environment separation |
-| [023_capstone_module](023_capstone_module/task) | Capstone: build a module | modules, capstone project |
+| [022_capstone_module](022_capstone_module/task) | Capstone: build a module | modules, capstone project |
 
 ## General setup
 

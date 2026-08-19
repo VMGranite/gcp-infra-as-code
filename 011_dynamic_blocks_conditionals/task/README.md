@@ -8,6 +8,31 @@ instead of hardcoding it.
 
 [Visit the Official Terraform Conditional Expressions Documentation Here](https://developer.hashicorp.com/terraform/language/expressions/conditionals)
 
+## Why dynamic blocks, and why conditionals?
+
+In [007_count_for_each](../007_count_for_each) you used `for_each` to
+generate multiple *resources* from one block. A `dynamic` block solves
+the same problem one level deeper: generating multiple *nested
+blocks* — like `allow { }` inside a single `google_compute_firewall`
+resource — from a list, instead of writing one `allow { }` per port by
+hand. Without it, adding a port means editing the resource itself;
+with it, adding a port means editing `var.allowed_ports`, and the
+resource never changes. That distinction matters because the resource
+block is the thing you review and diff carefully — the variable is
+the thing you expect to change often.
+
+Conditional expressions (`condition ? true_val : false_val`) solve a
+different problem: picking one of two values for a single argument
+based on some other value, without duplicating the whole resource
+block for each case. Here, `source_ranges` needs to be the open
+internet in `dev`/`staging` (so you can reach it while testing) but
+locked to the IAP range in `prod` (see
+[010_firewall_rules](../010_firewall_rules) for why that matters). A
+conditional lets one resource block serve both cases — the
+alternative would be an `if`/`else`-style duplication of the entire
+resource per environment, which Terraform's declarative language
+doesn't really support cleanly anyway.
+
 ## Setup
 
 `variables.tf` already has `project_id`/`region` pre-filled — that
