@@ -33,7 +33,7 @@ Each numbered exercise folder has two subfolders:
 | [013_create_vm](013_create_vm/task) | Deploy a VM | `google_compute_instance`, startup scripts |
 | [014_templatefile_startup_script](014_templatefile_startup_script) | templatefile() (Part 1: render to output, Part 2: VM startup script) | rendering config files, `templatefile()` |
 | [015_service_accounts_iam](015_service_accounts_iam/task) | Service accounts and IAM | least-privilege IAM |
-| [016_secret_manager](016_secret_manager/task) | Secret Manager | sensitive variables, `google_secret_manager_secret` |
+| [016_secret_manager](016_secret_manager/task) | Secret Manager | `google_secret_manager_secret`, keeping values out of Terraform state |
 | [017_provider_aliases](017_provider_aliases/task) | Provider aliases | `alias`, multi-region/multi-project |
 | [018_build_a_module](018_build_a_module/task) | Build a module | modules, `source`, reusability |
 | [019_remote_state](019_remote_state/task) | Remote state | `backend "gcs"`, state locking |

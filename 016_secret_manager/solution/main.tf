@@ -30,11 +30,6 @@ resource "google_secret_manager_secret" "app_secret" {
   depends_on = [google_project_service.secretmanager]
 }
 
-resource "google_secret_manager_secret_version" "app_secret_version" {
-  secret      = google_secret_manager_secret.app_secret.id
-  secret_data = var.secret_value
-}
-
 resource "google_service_account" "secret_reader" {
   account_id   = "secret-reader"
   display_name = "Secret reader (exercise 016)"

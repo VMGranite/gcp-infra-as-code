@@ -45,4 +45,5 @@ configs that need to reference what this one created).
   there's no reason to hide them.
   [016_secret_manager](../../016_secret_manager) is where a value
   that actually needs hiding shows up, and it's handled completely
-  differently.
+  differently — it never becomes a Terraform variable at all, not
+  even a `sensitive` one.

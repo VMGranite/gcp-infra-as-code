@@ -1,10 +1,34 @@
 # 016 — Secret Manager
 
-**Goal:** store a sensitive value the right way — never hardcoded,
-never printed in plan/apply output — and grant a service account
-narrow access to read it.
+**Goal:** store a sensitive value the right way — Terraform manages
+the secret's *existence* and *who can read it*, but never the value
+itself.
 
 [Visit the Official google_secret_manager_secret Resource Documentation Here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/secret_manager_secret)
+
+[Visit the Official Secret Manager: Add a Secret Version Documentation Here](https://cloud.google.com/secret-manager/docs/add-secret-version)
+
+## Why the value never goes through Terraform at all
+
+The obvious approach is a `sensitive = true` variable, passed to a
+`google_secret_manager_secret_version` resource. Don't do that here —
+`sensitive = true` only masks a value from `plan`/`apply` **output**;
+it does nothing to the **state file**. Once a value flows into any
+resource argument, Terraform writes it to `terraform.tfstate` in
+plaintext, permanently, regardless of how carefully you typed it in.
+Whether you passed it via `-var`, an environment variable, or hand-typed
+it into a prompt doesn't matter — the moment it's a Terraform-managed
+value, it's sitting in your state file.
+
+The actual fix isn't a safer way to type the value — it's to never let
+it become a Terraform-managed value in the first place. This exercise
+has Terraform create the secret **container** (`google_secret_manager_secret`)
+and the **access control** (who can read it), and stops there. The
+value itself gets added afterward, directly against the Secret Manager
+API — outside Terraform's plan/apply/state pipeline entirely, the same
+way a real pipeline injects secrets from a vault at deploy time rather
+than writing them into the infrastructure code that provisions the
+vault.
 
 ## Setup
 
@@ -12,10 +36,6 @@ narrow access to read it.
 part goes back to [003_variables_and_outputs](../003_variables_and_outputs).
 `terraform.tfvars` is already here too, committed with placeholder
 values — just edit `project_id` to your real project ID.
-
-This is the one exercise where a new variable does **not** follow the
-usual "add it to `terraform.tfvars`" pattern — see step 2 below and
-the discussion question for why.
 
 ## Tasks
 
@@ -25,32 +45,7 @@ the discussion question for why.
    ```
    or manage it with a `google_project_service` resource, as in
    earlier exercises.
-2. Add a variable `secret_value` with `sensitive = true`. Do **not**
-   give it a default, and do **not** add it to `terraform.tfvars` —
-   you'll supply the real value another way instead. This is the
-   first variable in the course that's actually different from
-   `project_id`/`region`/`environment`/etc.: every one of those has
-   been fine to write straight into a committed `terraform.tfvars`,
-   because none of them are secrets — leaking your GCP project ID
-   costs nothing. A real secret can't use that file at all, committed
-   or not: `terraform.tfvars` is still a plaintext file sitting on
-   disk, and "committed" vs. "gitignored" is the wrong axis for
-   something like this — the answer isn't "hide the file," it's
-   "never let the value touch a file." Two ways to supply it instead:
-   ```bash
-   # typed interactively, for this one command only:
-   terraform apply -var="secret_value=whatever-you-want"
-
-   # or as an environment variable Terraform reads automatically —
-   # this is closer to how a real pipeline does it, pulling the
-   # value from a vault (HashiCorp Vault, GCP Secret Manager itself,
-   # a CI provider's secret store) into an env var right before
-   # `terraform apply` runs, so no human ever types it and it's
-   # never in shell history either:
-   export TF_VAR_secret_value="whatever-you-want"
-   terraform apply
-   ```
-3. Define a `google_secret_manager_secret` (secret ID `app-secret`)
+2. Define a `google_secret_manager_secret` (secret ID `app-secret`)
    with automatic replication — Secret Manager stores encrypted
    copies of the secret's value across multiple regions so it's still
    available if one region has an outage; `auto {}` tells GCP to pick
@@ -60,30 +55,74 @@ the discussion question for why.
      auto {}
    }
    ```
-4. Define a `google_secret_manager_secret_version` that stores
-   `var.secret_value` in that secret.
-5. Define a `google_service_account` named `secret-reader`.
-6. Grant it `roles/secretmanager.secretAccessor` on **that one
-   secret only** — via `google_secret_manager_secret_iam_member` —
-   not a project-wide binding.
-7. Run `terraform apply` using either method from step 2 — the point
-   is that neither one ever wrote the value to a file.
-8. Confirm the value is retrievable and that Terraform's own output
-   never showed it in plaintext:
+   Do **not** define a `google_secret_manager_secret_version` resource
+   — that's the whole point of this exercise.
+3. Define a `google_service_account` named `secret-reader`, and grant
+   it `roles/secretmanager.secretAccessor` on **that one secret only**
+   — via `google_secret_manager_secret_iam_member` — not a
+   project-wide binding.
+4. Run `terraform apply`. Confirm the secret exists but has no version
+   yet:
+   ```bash
+   gcloud secrets versions list app-secret
+   # (empty — Listed 0 items.)
+   ```
+5. Add the actual value **outside Terraform**, using either method —
+   they're equivalent, pick whichever you want to practice:
+
+   **gcloud:**
+   ```bash
+   echo -n "whatever-value-you-want" | gcloud secrets versions add app-secret --data-file=-
+   ```
+   `--data-file=-` reads the value from stdin instead of a command-line
+   argument or a file on disk — nothing here ends up in your shell
+   history or a temp file the way `--data-file=/tmp/secret.txt` or a
+   literal value typed as an argument would.
+
+   **GCP Console:**
+   1. Console → search bar → "Secret Manager" (or Navigation menu →
+      Security → Secret Manager).
+   2. Click into `app-secret`.
+   3. Click **+ NEW VERSION**, paste the value into the field, click
+      **ADD NEW VERSION**.
+6. Run `terraform plan` — confirm it shows **no changes**. Terraform
+   has no resource tracking the secret's version, so it has nothing to
+   notice or reconcile.
+7. Confirm the value never touched Terraform's own bookkeeping:
+   ```bash
+   grep -r "whatever-value-you-want" terraform.tfstate
+   ```
+   This should return nothing. Compare that to what would happen if
+   you'd used a `google_secret_manager_secret_version` resource with
+   `secret_data = var.secret_value` instead — grep the state file for
+   that value, and it would be right there in plaintext.
+8. Confirm the value is retrievable through Secret Manager itself
+   (this is the access path a real workload would use, via IAM, not
+   via Terraform):
    ```bash
    gcloud secrets versions access latest --secret=app-secret
    ```
+   To view it in the Console: `app-secret`'s page → the version's row
+   → the "view" (eye) icon, or **Actions → View secret value**.
 
 ## Success criteria
 
-- `terraform plan`/`apply` output never prints the raw secret value —
-  it shows `(sensitive value)` instead.
-- The `secret-reader` service account can access this one secret and
-  nothing else.
+- `terraform state list` shows the secret container and the IAM
+  binding — Terraform manages both.
+- No `google_secret_manager_secret_version` resource exists anywhere
+  in your `.tf` files.
+- Grepping `terraform.tfstate` for the value you chose in step 5 finds
+  nothing.
+- `gcloud secrets versions access latest --secret=app-secret` (or the
+  Console) successfully returns the value.
 
 ## Discussion question
 
-`sensitive = true` hides a value from CLI output, but does it encrypt
-that value inside the Terraform **state file**? What does that imply
-about how you should treat access to your state backend (see
-[019_remote_state](../../019_remote_state))?
+If you'd used a `sensitive = true` variable and a
+`google_secret_manager_secret_version` resource instead, `terraform
+plan`/`apply` output would never have shown the value — but it would
+still be sitting in `terraform.tfstate` in plaintext. Now that the
+value never touches Terraform at all, what's actually protecting it?
+(See [019_remote_state](../019_remote_state) and
+[020_state_bucket_least_privilege](../020_state_bucket_least_privilege)
+for what — or who — that answer points to.)

@@ -8,8 +8,3 @@ variable "region" {
   type        = string
   default     = "us-central1"
 }
-
-# TODO: variable "secret_value" { sensitive = true, no default }
-# Deliberately NOT added to terraform.tfvars, unlike every other
-# variable in this course — see README.md for why secrets get a
-# different workflow than project_id/region.

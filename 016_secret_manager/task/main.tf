@@ -19,10 +19,10 @@ provider "google" {
 # TODO: google_secret_manager_secret "app_secret"
 # - secret_id = "app-secret"
 # - replication { auto {} }
-
-# TODO: google_secret_manager_secret_version "app_secret_version"
-# - secret      = reference to the secret above
-# - secret_data = var.secret_value
+#
+# Do NOT define a google_secret_manager_secret_version resource here.
+# The actual value goes in out-of-band — see README.md step 4 — on
+# purpose, so it never becomes a Terraform-managed value at all.
 
 # TODO: google_service_account "secret_reader"
 
