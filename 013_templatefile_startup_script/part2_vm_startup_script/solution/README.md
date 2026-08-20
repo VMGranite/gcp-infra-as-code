@@ -1,12 +1,13 @@
-# 013 — Solution: templatefile() for a Startup Script
+# 013 (Part 2) — Solution: templatefile() for a Startup Script
 
 ## What this creates
 
 - The VM/network/firewall pattern from
-  [012_create_vm](../012_create_vm), with one change:
+  [012_create_vm](../../../012_create_vm), with one change:
   `metadata_startup_script` is rendered from
   `templates/startup.sh.tftpl` via `templatefile()` instead of an
-  inline heredoc.
+  inline heredoc — the same function [Part 1](../../part1_render_output)
+  used, now wired into a real resource instead of an `output`.
 
 ## Why templatefile() instead of a heredoc
 
@@ -49,3 +50,9 @@ responsibility, not Terraform's.
   (`gcloud compute instances reset`) to see the new script run. This
   is a common surprise: the *config* being correct and *applied*
   doesn't always mean the *running system* reflects it yet.
+- Contrast this with [Part 1](../../part1_render_output), where the same
+  kind of variable change showed up the instant you reran `apply`.
+  The function isn't what changed — `templatefile()` still renders at
+  plan time in both cases. What changed is where the rendered value
+  goes: an `output` has no separate running system to fall out of
+  sync with, but a VM's boot process does.

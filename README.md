@@ -30,7 +30,7 @@ Each numbered exercise folder has two subfolders:
 | [010_firewall_rules](010_firewall_rules/task) | Firewall rules | `google_compute_firewall`, least privilege |
 | [011_dynamic_blocks_conditionals](011_dynamic_blocks_conditionals/task) | Dynamic blocks and conditionals | `dynamic`, ternary expressions |
 | [012_create_vm](012_create_vm/task) | Deploy a VM | `google_compute_instance`, startup scripts |
-| [013_templatefile_startup_script](013_templatefile_startup_script/task) | templatefile() | rendering config files, `templatefile()` |
+| [013_templatefile_startup_script](013_templatefile_startup_script) | templatefile() (Part 1: render to output, Part 2: VM startup script) | rendering config files, `templatefile()` |
 | [014_service_accounts_iam](014_service_accounts_iam/task) | Service accounts and IAM | least-privilege IAM |
 | [015_secret_manager](015_secret_manager/task) | Secret Manager | sensitive variables, `google_secret_manager_secret` |
 | [016_provider_aliases](016_provider_aliases/task) | Provider aliases | `alias`, multi-region/multi-project |
