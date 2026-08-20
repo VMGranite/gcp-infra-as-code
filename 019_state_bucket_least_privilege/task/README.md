@@ -18,16 +18,37 @@ them `sensitive`. Access to it deserves the same scrutiny as
 production credentials, not "whoever happens to be Owner on the
 project."
 
-`state_runner` below stands in for "whatever runs `terraform apply`"
-in a real setup — a CI pipeline, typically, which is a distinct
-identity from any engineer's own account. Scoping *that* identity
-narrowly is the actual point: read/write access to state objects,
-nothing that lets it touch the bucket's own IAM policy. Alongside it,
-you'll grant your own user a second, deliberately weaker binding —
-because "someone who runs applies" and "someone who occasionally
-needs to look at state while debugging" are different needs, and
-least privilege means neither one should be stretched to cover the
-other.
+## What's a CI pipeline, and what is `state_runner` standing in for?
+
+A **CI (continuous integration) pipeline** is an automated system —
+GitHub Actions, GitLab CI, and Jenkins are common examples — that runs
+commands for you when something happens, like code getting merged,
+instead of a person typing them at a keyboard. On a real team,
+`terraform apply` is usually run by one of these systems, not from an
+engineer's own laptop: someone merges a change, and the pipeline
+checks out the code and runs Terraform on a server somewhere, fully
+unattended.
+
+That pipeline still has to authenticate to GCP to do anything — and
+just like your VM in [014_service_accounts_iam](../014_service_accounts_iam)
+needed its own service account instead of borrowing yours, a CI
+pipeline needs its own identity too. This course doesn't have an
+actual CI pipeline wired up anywhere; there's no GitHub Actions
+workflow running these exercises for you. `state_runner` is a service
+account **you create by hand**, standing in for where that pipeline's
+identity would go — it exists so you can see the pattern (and, in the
+steps below, actually prove the IAM boundary holds) without needing a
+whole separate CI system running somewhere. Unlike `vm_runner` in 014,
+nothing is actually attached to `state_runner` here — no VM uses it,
+nothing runs as it. It only exists to be scoped and inspected.
+
+Scoping that identity narrowly is the actual point: read/write access
+to state objects, nothing that lets it touch the bucket's own IAM
+policy. Alongside it, you'll grant your own user a second, deliberately
+weaker binding — because "whatever runs applies" and "someone who
+occasionally needs to look at state while debugging" are different
+needs, and least privilege means neither one should be stretched to
+cover the other.
 
 ## Setup
 

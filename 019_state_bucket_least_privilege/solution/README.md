@@ -16,11 +16,17 @@
 
 Every exercise so far has run as your own `gcloud auth` login. In a
 real pipeline, the identity that runs `terraform apply` day to day is
-its own service account — not any individual engineer's account —
-precisely so its permissions can be scoped and audited independently
-of whoever happens to trigger a run. `state_runner` makes that
-distinction concrete: even though you're the one applying this
-config, the *bucket's* IAM policy only names `state_runner`, not you.
+its own service account — belonging to whatever CI system does the
+running (GitHub Actions, GitLab CI, and similar — see the task
+README's "What's a CI pipeline" section if you skipped it) — not any
+individual engineer's account, precisely so its permissions can be
+scoped and audited independently of whoever happens to trigger a run.
+`state_runner` makes that distinction concrete: even though you're the
+one applying this config, the *bucket's* IAM policy only names
+`state_runner`, not you. Nothing in this exercise actually runs as
+`state_runner` — no VM, no pipeline — it exists purely to be scoped
+and inspected, standing in for an identity this course has no real
+version of.
 
 ## Why `roles/storage.objectAdmin`, and why not `roles/storage.admin`
 
