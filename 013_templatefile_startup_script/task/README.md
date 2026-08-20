@@ -5,6 +5,20 @@ variables, instead of a raw heredoc string baked into `main.tf`.
 
 [Visit the Official Terraform templatefile() Function Documentation Here](https://developer.hashicorp.com/terraform/language/functions/templatefile)
 
+## Why templatefile() instead of a heredoc
+
+[012_create_vm](../012_create_vm)'s startup script is a heredoc
+(`<<-EOT ... EOT`) written directly inside the resource block — fine
+for a short, static script, but that stops working well the moment
+the script needs to vary: a value pulled from a variable, different
+packages per environment, or just a script long enough that burying
+it inside `main.tf` hurts readability. `templatefile(path, vars)`
+reads a file from disk and renders it with the variables you pass in,
+the same way a resource block gets rendered with the values in
+`terraform.tfvars` — it separates "the script" (a file you can
+syntax-highlight and read on its own) from "the values that fill it
+in."
+
 ## Setup
 
 `variables.tf` already has `project_id`/`region` pre-filled — that
