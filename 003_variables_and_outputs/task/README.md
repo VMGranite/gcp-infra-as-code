@@ -57,7 +57,7 @@ this course, `terraform.tfvars` is committed like any other file,
 starting here.
 
 That's not true of every variable you'll meet, though.
-[015_secret_manager](../../015_secret_manager) introduces a genuinely
+[016_secret_manager](../../016_secret_manager) introduces a genuinely
 sensitive value, and treats it completely differently — never written
 to any file, committed or not. That contrast is the actual lesson:
 most config is fine to commit; a real secret needs a different
