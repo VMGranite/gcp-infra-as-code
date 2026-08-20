@@ -6,16 +6,35 @@ waiting, no network, no GCP resource at all.
 
 [Visit the Official Terraform templatefile() Function Documentation Here](https://developer.hashicorp.com/terraform/language/functions/templatefile)
 
-## Why start here, before touching a VM
+## What is templatefile(), and why do we even want it?
 
-`templatefile(path, vars)` reads a file from disk and renders it with
-the variables you pass in — like a mail-merge template: the file has
-blanks (`${name}`), and the second argument is what you'd type in to
-fill them. That's the whole function. [Part 2](../../part2_vm_startup_script)
-puts it to use inside a VM's startup script, but a VM adds boot time,
-an external IP, and `curl` on top of the one new idea — none of which
-is `templatefile()` itself. This part strips all of that away so you
-can watch the function work in isolation first.
+`templatefile(path, vars)` takes a text file with blanks in it and
+fills those blanks in with real values you give it — like a form
+letter, or Mad Libs. You write the file once with a placeholder like
+`${name}`, and Terraform swaps in whatever value you pass for `name`
+when it runs.
+
+Why bother, instead of just writing the text you want directly? Two
+ordinary reasons:
+
+- **You want the same file to produce different results.** Hardcode
+  `"Hello, Student!"` directly in your Terraform code and that's the
+  only thing it'll ever say. A template (`Hello, ${name}!`) can
+  produce `"Hello, Alice!"` or `"Hello, Bob!"` from the exact same
+  file, depending on what you pass in.
+- **Long text buried inside Terraform code gets ugly fast.** Once
+  what you're generating is more than a line or two — a VM startup
+  script, a config file — cramming it into a resource block as one
+  giant string makes it hard to read and edit. A separate file means
+  you can read it, edit it, and get real syntax highlighting for it,
+  apart from the Terraform logic that fills it in.
+
+That's the whole function. [Part 2](../../part2_vm_startup_script)
+puts it to use inside a VM's startup script — exactly the "long text,
+needs to vary" case above — but a VM adds boot time, an external IP,
+and `curl` on top of the one new idea, none of which is
+`templatefile()` itself. This part strips all of that away so you can
+watch the function work in isolation first.
 
 ## Setup
 
