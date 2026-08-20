@@ -11,7 +11,7 @@
 
 ## Why this exercise exists before the capstone
 
-[022_capstone_module](../../022_capstone_module) asks you to
+[024_capstone_module](../../024_capstone_module) asks you to
 modularize network + firewall + VM all at once, which is a lot to
 take on for your first module. This exercise isolates the *only*
 new idea — turning a resource block into a reusable, parameterized

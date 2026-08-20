@@ -120,7 +120,7 @@ terraform destroy      # tears everything back down
   GCP directly asking "does this exist yet?" every time. You won't
   need to think about this file much until
   [018_remote_state](../018_remote_state), which moves it off local
-  disk, and [019](../019_configuration_drift)–[021](../021_import_existing_resources),
+  disk, and [020](../020_configuration_drift)–[023](../023_import_existing_resources),
   which are entirely about what happens when this file and the real
   world disagree — but it's been there, quietly, since your very
   first `terraform apply` in
@@ -152,11 +152,11 @@ solution outputs `vm_external_ip`, and `terraform output` after any
 `apply` will print whatever that exercise defined, which is often
 faster than navigating the Console at all.
 
-## 6. Manual ("clickops") resources — [019_configuration_drift](../019_configuration_drift) and [021_import_existing_resources](../021_import_existing_resources)
+## 6. Manual ("clickops") resources — [020_configuration_drift](../020_configuration_drift) and [023_import_existing_resources](../023_import_existing_resources)
 
 Two exercises deliberately have you touch GCP outside of Terraform —
-`019_configuration_drift` has you edit a resource by hand with
-`gcloud`, and `021_import_existing_resources` has you create a bucket
+`020_configuration_drift` has you edit a resource by hand with
+`gcloud`, and `023_import_existing_resources` has you create a bucket
 by hand before Terraform ever knows about it. Both are intentional:
 you can't learn how Terraform handles "someone changed this by hand"
 without actually doing it. But it means Terraform doesn't know about
@@ -175,7 +175,7 @@ up.
   Terraform-managed resources.
 - **Clean up depends on whether you finished the exercise:**
   - If a manually-created resource ends up successfully imported into
-    Terraform (as in `021`), it's now Terraform-managed — a normal
+    Terraform (as in `023`), it's now Terraform-managed — a normal
     `terraform destroy` handles it like anything else.
   - If you stop partway — created something by hand but never
     imported it, or abandoned the exercise — Terraform still doesn't

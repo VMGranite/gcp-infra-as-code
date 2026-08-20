@@ -1,4 +1,4 @@
-# 022 — Capstone: Build a Module
+# 024 — Capstone: Build a Module
 
 **Goal:** refactor everything from exercises 008, 010, 012 (network,
 firewall, VM) into a reusable module, then call it twice with

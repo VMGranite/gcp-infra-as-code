@@ -1,4 +1,4 @@
-# 020 — Solution: terraform state mv / rm
+# 022 — Solution: terraform state mv / rm
 
 ## What this creates
 
@@ -57,12 +57,12 @@ instead of applying it.
   same thing correctly, but Terraform's bookkeeping disagrees" —
   which is a different problem than "reality needs to change to match
   my code" (`apply`) or "my code needs to change to match reality"
-  ([019_configuration_drift](../019_configuration_drift)).
+  ([020_configuration_drift](../020_configuration_drift)).
 - `terraform state list` is worth running after each step here — it's
   the most direct way to see exactly what Terraform currently
   believes it manages, independent of what your `.tf` files say.
 - This exercise and
-  [021_import_existing_resources](../021_import_existing_resources)
+  [023_import_existing_resources](../023_import_existing_resources)
   both end with `terraform import`, but for different reasons: there,
   the resource was *never* managed; here, it was un-managed on
   purpose (via `state rm`) and then re-managed, as a way to see both

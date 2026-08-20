@@ -1,4 +1,4 @@
-# 021 — Solution: Migrating Existing Resources
+# 023 — Solution: Migrating Existing Resources
 
 ## What this creates
 
@@ -56,7 +56,7 @@ from something correct instead of guessing from scratch.
   label has done its job (flagging this as something created outside
   Terraform); keeping it or removing it in a follow-up change is a
   judgment call, not something this exercise requires either way.
-- This exercise and [019_configuration_drift](../../019_configuration_drift)
+- This exercise and [020_configuration_drift](../../020_configuration_drift)
   are the same underlying idea from opposite directions: drift is
   "a *managed* resource that reality disagreed with," import is
   "a real resource that was never managed in the first place."

@@ -1,4 +1,4 @@
-# 021 — Migrating Existing Resources
+# 023 — Migrating Existing Resources
 
 **Goal:** bring a resource that already exists in GCP — but was never
 created by Terraform — under Terraform's management, using an

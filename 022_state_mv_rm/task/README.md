@@ -1,4 +1,4 @@
-# 020 — terraform state mv / rm
+# 022 — terraform state mv / rm
 
 **Goal:** refactor a resource's address in your code without
 destroying and recreating the real thing, and understand what

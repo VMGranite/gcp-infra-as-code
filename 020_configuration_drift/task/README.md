@@ -1,4 +1,4 @@
-# 019 — Configuration Drift
+# 020 — Configuration Drift
 
 **Goal:** see what happens when something Terraform manages gets
 changed outside of Terraform, and learn the two different ways to

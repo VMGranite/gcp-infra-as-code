@@ -1,4 +1,4 @@
-# 019 — Solution: Configuration Drift
+# 020 — Solution: Configuration Drift
 
 ## What this creates
 
@@ -80,7 +80,7 @@ it.
   — you didn't need a special flag to *detect* drift in step 4, only
   to update state *without* also correcting the real resource.
 - This exercise reuses the same "state vs. reality" boundary that
-  [021_import_existing_resources](../../021_import_existing_resources)
+  [023_import_existing_resources](../../023_import_existing_resources)
   deals with from the opposite direction: import is about bringing
   something real but *unmanaged* into Terraform; drift is about
   something already *managed* that reality quietly disagreed with.

@@ -3,7 +3,7 @@
 Start with [000_start_here](000_start_here) — it walks through
 finding your GCP project ID, authenticating, and the `init`/`plan`/
 `apply`/`destroy` workflow you'll repeat in every exercise below.
-Then work through the twenty-two numbered exercises in order of
+Then work through the twenty-four numbered exercises in order of
 increasing difficulty. Each folder is self-contained: work inside it,
 don't reference other exercises' state.
 
@@ -36,10 +36,12 @@ Each numbered exercise folder has two subfolders:
 | [016_provider_aliases](016_provider_aliases/task) | Provider aliases | `alias`, multi-region/multi-project |
 | [017_build_a_module](017_build_a_module/task) | Build a module | modules, `source`, reusability |
 | [018_remote_state](018_remote_state/task) | Remote state | `backend "gcs"`, state locking |
-| [019_configuration_drift](019_configuration_drift/task) | Configuration drift | `plan`, `apply -refresh-only`, state vs. reality |
-| [020_state_mv_rm](020_state_mv_rm/task) | terraform state mv / rm | refactoring addresses without destroying resources |
-| [021_import_existing_resources](021_import_existing_resources/task) | Migrating existing resources | `import` blocks, `-generate-config-out` |
-| [022_capstone_module](022_capstone_module/task) | Capstone: build a module | modules, capstone project |
+| [019_state_bucket_least_privilege](019_state_bucket_least_privilege/task) | Least-privilege access to the state bucket | scoped IAM, `google_storage_bucket_iam_member` |
+| [020_configuration_drift](020_configuration_drift/task) | Configuration drift | `plan`, `apply -refresh-only`, state vs. reality |
+| [021_audit_log_alerts](021_audit_log_alerts/task) | Alerting on manual (non-Terraform) changes | Cloud Audit Logs, log-based metrics, alert policies |
+| [022_state_mv_rm](022_state_mv_rm/task) | terraform state mv / rm | refactoring addresses without destroying resources |
+| [023_import_existing_resources](023_import_existing_resources/task) | Migrating existing resources | `import` blocks, `-generate-config-out` |
+| [024_capstone_module](024_capstone_module/task) | Capstone: build a module | modules, capstone project |
 
 ## General setup
 
