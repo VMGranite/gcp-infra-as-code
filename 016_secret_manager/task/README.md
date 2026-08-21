@@ -1,8 +1,8 @@
 # 016 — Secret Manager
 
-**Goal:** store a sensitive value the right way — Terraform manages
-the secret's *existence* and *who can read it*, but never the value
-itself.
+**Goal:** create a Secret Manager secret with Terraform, and add its
+value the right way — outside Terraform entirely, so the value never
+touches Terraform's state.
 
 [Visit the Official google_secret_manager_secret Resource Documentation Here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/secret_manager_secret)
 
@@ -23,12 +23,37 @@ value, it's sitting in your state file.
 The actual fix isn't a safer way to type the value — it's to never let
 it become a Terraform-managed value in the first place. This exercise
 has Terraform create the secret **container** (`google_secret_manager_secret`)
-and the **access control** (who can read it), and stops there. The
-value itself gets added afterward, directly against the Secret Manager
-API — outside Terraform's plan/apply/state pipeline entirely, the same
-way a real pipeline injects secrets from a vault at deploy time rather
-than writing them into the infrastructure code that provisions the
-vault.
+and stop there. The value itself gets added afterward, directly
+against the Secret Manager API — outside Terraform's plan/apply/state
+pipeline entirely, the same way a real pipeline injects secrets from a
+vault at deploy time rather than writing them into the infrastructure
+code that provisions the vault.
+
+## A note on viewing the value yourself
+
+By default, only Owner-level accounts can view a secret's value —
+Secret Manager isn't covered by the broad Editor/Viewer roles the way
+most GCP services are (this is a deliberate Google design choice, not
+an oversight: Secret Manager and Cloud KMS are two of a small number
+of services carved out of Editor specifically because they hold
+sensitive material). If `gcloud secrets versions access` or the
+Console's "View secret value" fails for you in step 6 below, that's
+this, not a mistake in your code — a real team would grant explicit,
+narrow `roles/secretmanager.secretAccessor` access to whichever
+service account or person actually needs to read it (see "Things
+worth noticing" in the solution README for what that looks like in
+code).
+
+Creating the secret doesn't grant you access to it — those are two
+separate permissions. To view it yourself, someone with
+`roles/secretmanager.admin` (or Owner) on the project would need to
+grant your account `secretmanager.secretAccessor` on this one secret,
+or grant you the admin role directly. Granting that access requires
+`secretmanager.secrets.setIamPolicy`, which is exactly the permission
+this exercise's own IAM-granting step (see "Things worth noticing" in
+the solution README) needs and many training projects don't include —
+not something fixable from inside Terraform, since you can't grant
+yourself a permission you don't already have.
 
 ## Setup
 
@@ -57,64 +82,120 @@ values — just edit `project_id` to your real project ID.
    ```
    Do **not** define a `google_secret_manager_secret_version` resource
    — that's the whole point of this exercise.
-3. Define a `google_service_account` named `secret-reader`, and grant
-   it `roles/secretmanager.secretAccessor` on **that one secret only**
-   — via `google_secret_manager_secret_iam_member` — not a
-   project-wide binding.
-4. Run `terraform apply`. Confirm the secret exists but has no version
+3. Run `terraform apply`. Confirm the secret exists but has no version
    yet:
    ```bash
    gcloud secrets versions list app-secret
    # (empty — Listed 0 items.)
    ```
-5. Add the actual value **outside Terraform**, using either method —
-   they're equivalent, pick whichever you want to practice:
-
-   **gcloud:**
-   ```bash
-   echo -n "whatever-value-you-want" | gcloud secrets versions add app-secret --data-file=-
-   ```
-   `--data-file=-` reads the value from stdin instead of a command-line
-   argument or a file on disk — nothing here ends up in your shell
-   history or a temp file the way `--data-file=/tmp/secret.txt` or a
-   literal value typed as an argument would.
-
-   **GCP Console:**
-   1. Console → search bar → "Secret Manager" (or Navigation menu →
-      Security → Secret Manager).
-   2. Click into `app-secret`.
-   3. Click **+ NEW VERSION**, paste the value into the field, click
-      **ADD NEW VERSION**.
-6. Run `terraform plan` — confirm it shows **no changes**. Terraform
+4. Add the actual value **outside Terraform** — see the section below
+   for both ways to do it.
+5. Run `terraform plan` — confirm it shows **no changes**. Terraform
    has no resource tracking the secret's version, so it has nothing to
    notice or reconcile.
-7. Confirm the value never touched Terraform's own bookkeeping:
+6. Confirm the value never touched Terraform's own bookkeeping:
    ```bash
-   grep -r "whatever-value-you-want" terraform.tfstate
+   grep -r "correct-horse-battery-staple" terraform.tfstate
    ```
    This should return nothing. Compare that to what would happen if
    you'd used a `google_secret_manager_secret_version` resource with
    `secret_data = var.secret_value` instead — grep the state file for
    that value, and it would be right there in plaintext.
-8. Confirm the value is retrievable through Secret Manager itself
-   (this is the access path a real workload would use, via IAM, not
-   via Terraform):
+7. Try to confirm the value is retrievable through Secret Manager
+   itself:
    ```bash
    gcloud secrets versions access latest --secret=app-secret
    ```
-   To view it in the Console: `app-secret`'s page → the version's row
-   → the "view" (eye) icon, or **Actions → View secret value**.
+   or via the Console (see the section below). See the permissions
+   note above if this fails for your account — that's expected in some
+   training environments, not a sign anything is broken.
+
+## Adding a Secret Value (Once the Secret Container Exists)
+
+After step 3, `app-secret` exists but has zero versions — there's
+nothing to read yet. Both methods below add a **new version** holding
+your value; they're equivalent, pick whichever you want to practice.
+The examples use `correct-horse-battery-staple` as a stand-in
+value — swap in anything you want, it doesn't matter what it is for
+this exercise, only that it never touches a Terraform resource. Every
+time you add a value this way (even the same value twice), it becomes
+a new version number (`1`, `2`, `3`, ...) rather than overwriting the
+last one — Secret Manager keeps every version around until you
+explicitly disable or destroy it.
+
+**gcloud:**
+```bash
+echo -n "correct-horse-battery-staple" | gcloud secrets versions add app-secret --data-file=-
+```
+`--data-file=-` reads the value from stdin instead of a command-line
+argument or a file on disk — nothing here ends up in your shell
+history or a temp file the way `--data-file=/tmp/secret.txt` or a
+literal value typed as an argument would. Output confirms which
+version number you just created, e.g. `Created version [1] of the
+secret [app-secret].`
+
+**GCP Console:**
+1. Console → search bar → "Secret Manager" (or Navigation menu →
+   Security → Secret Manager).
+2. Click into `app-secret`.
+3. Click **+ NEW VERSION** (top of the page, or on the **Versions**
+   tab).
+4. Paste or type the value into the field. There's no confirmation
+   step showing you the value back — double-check what you pasted
+   before continuing, since the field itself is masked.
+5. Click **ADD NEW VERSION**. The new version appears in the list
+   immediately, with a status of **Enabled**.
+
+Either way, confirm it worked from the command line:
+```bash
+gcloud secrets versions list app-secret
+```
+You should now see at least one version listed, where step 3 showed
+none.
+
+## Viewing Secret Manager in the GCP Console
+
+Worth a look even if you did everything else through `gcloud` — this
+is where you'd go to check on a secret someone else created, or to
+confirm what a Terraform config actually did.
+
+1. **Navigate there:** Console → search bar (top of the page) → type
+   "Secret Manager" → click the result. Or: Navigation menu (☰) →
+   Security → Secret Manager.
+2. **The list page** shows every secret in the project — name,
+   replication setting, creation time. Find `app-secret` and click
+   into it.
+3. Inside a secret, there are a few tabs worth knowing:
+   - **Overview** — the secret's ID, replication policy, and labels.
+     This is the container Terraform created (`terraform state list`
+     shows this same resource).
+   - **Versions** — every version ever added, each with a version
+     number, state (Enabled/Disabled/Destroyed), and creation time.
+     The value you added in step 4 shows up here as version `1` —
+     Secret Manager tracks this regardless of whether Terraform does,
+     because versions are the API's concept, not Terraform's.
+   - **Permissions** — the IAM bindings on this one secret. This tab
+     is normally where you'd see who's been granted
+     `Secret Manager Secret Accessor` — see the permissions note above
+     for why this exercise doesn't create one for you.
+4. **To reveal a version's value:** on the **Versions** tab, find the
+   version's row, click the **⋮** (three-dot menu) at the end of it →
+   **View secret value**. Requires `secretmanager.versions.access` on
+   your account — see the permissions note above if this fails.
+
+Notice what's split across these tabs: **Overview** is exactly what
+your `.tf` files describe and `terraform state list` knows about.
+**Versions** — where the actual value lives — isn't.
 
 ## Success criteria
 
-- `terraform state list` shows the secret container and the IAM
-  binding — Terraform manages both.
+- `terraform state list` shows the secret container — Terraform
+  manages its existence.
 - No `google_secret_manager_secret_version` resource exists anywhere
   in your `.tf` files.
-- Grepping `terraform.tfstate` for the value you chose in step 5 finds
-  nothing.
-- `gcloud secrets versions access latest --secret=app-secret` (or the
-  Console) successfully returns the value.
+- A version exists (`gcloud secrets versions list app-secret` shows at
+  least one), added by you, outside Terraform.
+- Grepping `terraform.tfstate` for the value you chose finds nothing.
 
 ## Discussion question
 

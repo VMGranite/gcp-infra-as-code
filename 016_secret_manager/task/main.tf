@@ -23,9 +23,3 @@ provider "google" {
 # Do NOT define a google_secret_manager_secret_version resource here.
 # The actual value goes in out-of-band — see README.md step 4 — on
 # purpose, so it never becomes a Terraform-managed value at all.
-
-# TODO: google_service_account "secret_reader"
-
-# TODO: google_secret_manager_secret_iam_member granting secret_reader
-#       roles/secretmanager.secretAccessor on the secret above
-#       (not a project-level binding)

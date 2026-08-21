@@ -63,7 +63,7 @@ than one binding "because you're probably fine to access it anyway."
   attempt to solve who's allowed to change `state_runner`'s
   permissions going forward, only to establish the scoped boundary
   that question is really about. See the discussion question.
-- This is a narrower version of the same idea as
-  [016_secret_manager](../016_secret_manager)'s `secret-reader`:
-  scope a service account to exactly the one resource and exactly the
-  one capability it needs.
+- This is the same idea as
+  [015_service_accounts_iam](../015_service_accounts_iam)'s
+  `vm_runner`: scope a service account to exactly the one resource and
+  exactly the one capability it needs.

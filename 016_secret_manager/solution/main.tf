@@ -29,15 +29,3 @@ resource "google_secret_manager_secret" "app_secret" {
 
   depends_on = [google_project_service.secretmanager]
 }
-
-resource "google_service_account" "secret_reader" {
-  account_id   = "secret-reader"
-  display_name = "Secret reader (exercise 016)"
-}
-
-# Scoped to this one secret only — not project-wide secret access.
-resource "google_secret_manager_secret_iam_member" "secret_reader_accessor" {
-  secret_id = google_secret_manager_secret.app_secret.id
-  role      = "roles/secretmanager.secretAccessor"
-  member    = "serviceAccount:${google_service_account.secret_reader.email}"
-}
