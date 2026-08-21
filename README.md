@@ -5,7 +5,8 @@ finding your GCP project ID, authenticating, and the `init`/`plan`/
 `apply`/`destroy` workflow you'll repeat in every exercise below.
 Then work through the twenty-five numbered exercises in order of
 increasing difficulty. Each folder is self-contained: work inside it,
-don't reference other exercises' state.
+don't reference other exercises' state. [026_packer_image](026_packer_image)
+is optional, past the required sequence — see its own README.
 
 Each numbered exercise folder has two subfolders:
 
@@ -43,6 +44,7 @@ Each numbered exercise folder has two subfolders:
 | [023_state_mv_rm](023_state_mv_rm/task) | terraform state mv / rm | refactoring addresses without destroying resources |
 | [024_import_existing_resources](024_import_existing_resources/task) | Migrating existing resources | `import` blocks, `-generate-config-out` |
 | [025_capstone_module](025_capstone_module/task) | Capstone: build a module | modules, capstone project |
+| [026_packer_image](026_packer_image) (optional) | Packer (Part 1: build an image, Part 2: use it from Terraform) | machine images, "baking" vs. startup scripts |
 
 ## General setup
 
