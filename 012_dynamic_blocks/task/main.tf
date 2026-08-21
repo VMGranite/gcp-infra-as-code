@@ -14,9 +14,37 @@ provider "google" {
   region  = var.region
 }
 
-# TODO: google_compute_network + google_compute_subnetwork (from 008/010)
+resource "google_project_service" "compute" {
+  project            = var.project_id
+  service            = "compute.googleapis.com"
+  disable_on_destroy = false
+}
 
-# TODO: google_compute_firewall "this" with:
-# - dynamic "allow" { for_each = var.allowed_ports; content { ... } }
-# - source_ranges = ["35.235.240.0/20"] (fixed — no conditional here,
-#   that's 011's concept, not this one)
+resource "google_compute_network" "this" {
+  name                    = "dynamic-blocks-network"
+  auto_create_subnetworks = false
+
+  depends_on = [google_project_service.compute]
+}
+
+resource "google_compute_subnetwork" "this" {
+  name          = "dynamic-blocks-subnet"
+  ip_cidr_range = "10.0.1.0/24"
+  region        = var.region
+  network       = google_compute_network.this.id
+}
+
+resource "google_compute_firewall" "this" {
+  name    = "dynamic-blocks-allow"
+  network = google_compute_network.this.id
+
+  dynamic "allow" {
+    for_each = var.allowed_ports
+    content {
+      protocol = allow.value.protocol
+      ports    = allow.value.ports
+    }
+  }
+
+  source_ranges = ["35.235.240.0/20"]
+}
