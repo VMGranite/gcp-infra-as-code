@@ -1,2 +1,2 @@
-project_id = "your-gcp-project-id"
+project_id = "training-project-32-377beb"
 region     = "us-central1"
